@@ -1,0 +1,12 @@
+﻿@{
+    ViewBag.Title = "Подтверждение почты";
+}
+
+<div class="container">
+    <center><h2>@ViewBag.Title.</h2></center>
+    <div>
+        <h4 class="head-pos">
+            Благодарим за подтверждение электронной почты. @Html.ActionLink("Щелкните здесь для входа", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })
+        </h4>
+    </div>
+</div>

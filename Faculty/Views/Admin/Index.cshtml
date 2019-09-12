@@ -1,0 +1,117 @@
+﻿
+@{
+    ViewBag.Title = "Admin";
+}
+<br /><br /><br />
+
+<div>
+    @if(ViewBag.Count > 0)
+    {
+        <h4 class="head-pos">Список возможных преподавателей</h4>
+        <div class="admin-students">
+        <br />
+        <b>
+            <span>Имя</span>
+            <span>Фамилия</span>
+            <span>Почта</span>
+            <span>Метод</span>
+        </b>
+
+        @foreach (var el in ViewBag.Teachers)
+        {
+            <span>@el.Name</span>
+            <span>@el.Surname</span>
+            <span>@el.Email</span>
+            <span>
+                @using (Html.BeginForm("AddTeacher", "Admin", FormMethod.Post, new { @class = "form-method" }))
+                {
+                    <input type="hidden" name="Id" value="@el.Id" />
+                    <input type="submit" value="Добавить" class="btn-change" />
+                }
+                @using (Html.BeginForm("DelTeacher", "Admin", FormMethod.Post, new { @class = "form-method" }))
+                {
+                    <input type="hidden" name="Id" value="@el.Id" />
+                    <input type="submit" value="Удалить" class="btn-change" />
+                }
+            </span>
+        }
+        </div>
+    }
+    
+    <h4 class="head-pos">Список курсов</h4>
+    <div class="admin-courses">
+        <br />
+        <b>
+            <span>Название</span>
+            <span class="admin-date">Дата начала</span>
+            <span class="admin-date">Дата завершения</span>
+            <span class="teacher-surname">Фамилия преподавателя</span>
+            <span>Метод</span>
+        </b>
+
+        @foreach (var el in ViewBag.Courses)
+        {
+            <span>@el.Name</span>
+            <span class="admin-date">@el.StartDate</span>
+            <span class="admin-date">@el.FinishDate</span>
+            <span class="teacher-surname">@el.Teacher.Surname</span>
+            <span>
+                
+                @Html.ActionLink("Изменить", "ChangeCourse", new { id = el.CourseId }, new { @class = "btn-change form-method" })
+
+                @if (!el.IsRemoved)
+                {
+                    using (Html.BeginForm("DeleteCourse", "Admin", FormMethod.Post, new { @class = "form-method" }))
+                    {
+                        <input type="hidden" name="Name" value="@el.Name" />
+                        <input type="submit" value="Удалить" class="btn-change" />
+                    }
+                }
+                else
+                {
+                    using (Html.BeginForm("RestoreCourse", "Admin", FormMethod.Post, new { @class = "form-method" }))
+                    {
+                        <input type="hidden" name="Name" value="@el.Name" />
+                        <input type="submit" value="Восстановить" class="btn-change" />
+                    }
+                }
+
+            </span>
+      }
+      @Html.ActionLink("Добавить курс", "AddCourse", "Admin", new { @class = "btn btn-primary btn-add" })
+      </div>
+      <h4 class="head-pos">Список студентов</h4>
+      <div class="admin-students">
+           <br />
+           <b>
+                <span class="admin-date">Имя</span>
+                <span>Фамилия</span>
+                <span class="admin-date">Почта</span>
+                <span>--</span>
+           </b>
+            @foreach (var el in ViewBag.Students)
+            {
+                <span class="admin-date">@el.Name</span>
+                <span>@el.Surname</span>
+                <span class="admin-date">@el.Email</span>
+                <span>
+                @if (!el.IsBlocked)
+                {
+                    using (Html.BeginForm("BlockStudent", "Admin", FormMethod.Post, new { @class = "form-method" }))
+                    {
+                        <input type="hidden" name="Name" value="@el.Name" />
+                        <input type="submit" value="Заблокировать" class="btn-change" />
+                    }
+                }
+                else
+                {
+                    using (Html.BeginForm("UnblockStudent", "Admin", FormMethod.Post, new { @class = "form-method" }))
+                    {
+                        <input type="hidden" name="Name" value="@el.Name" />
+                        <input type="submit" value="Разблокировать" class="btn-change" />
+                    }
+                }
+                </span>
+            }
+     </div>        
+</div>

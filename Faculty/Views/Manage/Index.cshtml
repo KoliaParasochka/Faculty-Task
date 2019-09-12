@@ -1,0 +1,204 @@
+﻿@using ProjectDatabase.Models
+@using Faculty.Storages
+@model ProjectDatabase.Models.IndexViewModel
+@{
+    ViewBag.Title = "Управление";
+}
+
+<h2>@ViewBag.Title.</h2>
+
+<p class="text-success">@ViewBag.StatusMessage</p>
+<div>
+    <h4 class="head-pos">Ваша учетная запись</h4>
+    <hr />
+    <div class="container">
+        <dl class="dl-horizontal">
+            <dt class="right"></dt>
+            <dd>
+
+            </dd>
+            @*<dt>Внешние имена входа:</dt>*@
+            @*<dd>
+                @Model.Logins.Count
+                @Html.ActionLink("Управление", "ManageLogins")
+            </dd>*@
+            @*
+            Номера телефонов можно использовать в качестве второго проверочного фактора для системы двухфакторной проверки подлинности.
+
+             В <a href="https://go.microsoft.com/fwlink/?LinkId=403804">этой статье</a>
+                можно узнать, как настроить для этого приложения ASP.NET двухфакторную проверку подлинности с использованием SMS.
+
+             Настроив двухфакторную проверку подлинности, раскомментируйте следующий блок
+            *@
+            @*
+            <dt>Номер телефона:</dt>
+            <dd>
+                @(Model.PhoneNumber ?? "None")
+                @if (Model.PhoneNumber != null)
+                {
+                    <br />
+                    <text>[&nbsp;&nbsp;@Html.ActionLink("Change", "AddPhoneNumber")&nbsp;&nbsp;]</text>
+                    using (Html.BeginForm("RemovePhoneNumber", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <text>[<input type="submit" value="Удалить" class="btn-link" />]</text>
+                    }
+                }
+                else
+                {
+                    <text>[&nbsp;&nbsp;@Html.ActionLink("Add", "AddPhoneNumber")
+                }
+            </dd>
+            *@
+            @*<dt>Двухфакторная проверка подлинности:</dt>*@
+            @*<dd>*@
+            @*<p>
+                Поставщики двухфакторной проверки подлинности не настроены. В <a href="https://go.microsoft.com/fwlink/?LinkId=403804">этой статье</a>
+                можно узнать, как настроить двухфакторную проверку подлинности для этого приложения ASP.NET.
+            </p>*@
+            @*@if (Model.TwoFactor)
+            {
+                using (Html.BeginForm("DisableTwoFactorAuthentication", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <text>Включено
+                    <input type="submit" value="Отключить" class="btn btn-link" />
+                    </text>
+                }
+            }
+            else
+            {
+                using (Html.BeginForm("EnableTwoFactorAuthentication", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <text>Отключено
+                    <input type="submit" value="Включить" class="btn btn-link" />
+                    </text>
+                }
+            }*@
+            @*</dd>*@
+        </dl>
+
+        <div class="person-info">
+            <span><b>Имя: </b>@ViewBag.Student.Name</span>
+            <span><b>Фамилия: </b>@ViewBag.Student.Surname</span>
+            <span><b>Ваша почта: </b>@ViewBag.Student.Email</span>
+            <span>
+                <b>Пароль: </b>
+                @if (Model.HasPassword)
+                {
+                    @Html.ActionLink("Смена пароля", "ChangePassword")
+                }
+                else
+                {
+                    @Html.ActionLink("Создать", "SetPassword")
+                }
+            </span>
+        </div>
+
+
+
+        @if (ViewBag.Student.Courses.Count != 0)
+        {
+            @TakeHead("Курсы которые пройшли")
+            foreach (Course el in ViewBag.Student.Courses)
+            {
+                if (!el.IsRemoved)
+                {
+                    @TakeCourses(el.FinishDate < DateTime.Now, el, true, el.CourseId, ViewBag.Student.Id)
+                }
+            }
+            <br /><br />
+        }
+        else
+        {
+        }
+        @if (ViewBag.Student.Courses.Count != 0)
+        {
+            @TakeHead("Курсы которые сейчас проходят")
+            foreach (Course el in ViewBag.Student.Courses)
+            {
+                if (!el.IsRemoved)
+                {
+                    @TakeCourses(el.FinishDate > DateTime.Now && el.StartDate < DateTime.Now, el, false, el.CourseId, ViewBag.Student.Id)
+                }
+            }
+            <br /><br />
+        }
+        else
+        {
+        }
+        @if (ViewBag.Student.Courses.Count != 0)
+        {
+            @TakeHead("Курсы которые не начались")
+            foreach (Course el in ViewBag.Student.Courses)
+            {
+                if (!el.IsRemoved)
+                {
+                    @TakeCourses(el.StartDate > DateTime.Now, el, false, el.CourseId, ViewBag.Student.Id)
+                }
+            }
+        }
+        else
+        {
+        }
+
+
+
+        <br /><br />
+    </div>
+
+</div>
+@helper TakeHead(string title)
+{
+    <h4>@title</h4>
+    <hr />
+    <div class="element">
+        <b>
+            <span>Название</span>
+            <span class="date">Дата начала</span>
+            <span class="date">Дата завершения</span>
+            <span>Оценка</span>
+        </b>
+    </div>
+    <hr />
+}
+
+@helper TakeCourses(bool condition, Course course, bool finished, int courseId, int studentId)
+{
+    if (condition)
+    {
+        <hr />
+        <div class="element">
+            <span>@course.Name</span>
+            <span class="date">@course.StartDate</span>
+            <span class="date">@course.FinishDate</span>
+            @if (finished)
+            {
+                @GetGrade(courseId, studentId)
+            }
+            else
+            {
+                <span>Курс еще не окончен</span>
+            }
+        </div>
+        <hr />
+    }
+
+}
+
+
+@helper GetGrade(int courseId, int studentId)
+{
+    Storage storage = new Storage();
+    Mark mark = storage.GetMark(courseId, studentId);
+    if (mark != null)
+    {
+        <span>@mark.Grade</span>
+    }
+    else
+    {
+        <span></span>
+    }
+
+}

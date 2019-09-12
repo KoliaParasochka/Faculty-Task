@@ -1,0 +1,55 @@
+﻿@model List<ProjectDatabase.Models.Course>
+
+<div class="menu-search-form">       
+    <div class="search-form">
+    @using (Ajax.BeginForm("ShowCourses", new { @class = "right-form" }, new AjaxOptions { UpdateTargetId = "results" }))
+     {
+        <input type="text" name="Name" placeholder="Поиск" />
+        <input type="submit" value="Найти" class="btn btn-primary" />
+     }
+     </div>
+</div>
+    <h3 class="head-pos">Зарегистрируйтесь на наши курсы</h3>
+    <article class="courses">
+        @for (int i = 0; i < Model.Count; i++)
+        {
+        <section>
+            @Spaces(Model[i].Name)
+            @GetFirstText(Model[i].Text)
+            @using (Html.BeginForm("Read", "Home", FormMethod.Post))
+            {
+                <input type="hidden" value=@Model[i].CountStudents name="countStud" />
+                <input type="hidden" value=@Model[i].Teacher.Name name="TeacherName" />@*Можна преобразовать у модель!*@
+                <input type="hidden" value=@Model[i].Teacher.Surname name="TeacherSurname" />
+                <input type="hidden" value=@Model[i].StartDate name="StartDate" />
+                <input type="hidden" value=@Model[i].FinishDate name="FinishDate" />
+                <input type="hidden" value=@Model[i].Name name="Name" />
+                <button name="Text" value="@Model[i].Text" class="btn btn-primary right">Подробнее</button>
+            }
+        </section>
+        }
+    </article>
+
+
+@helper GetFirstText(string Text)
+{
+    string txt = string.Empty;
+    string str = string.Empty;
+    for (int i = 0; i < Text.Length; i++)
+    {
+        str += Text[i];
+    }
+    int j = 0;
+    string strRes = string.Empty;
+    while (j < 200 && ( j <= str.Length-1))
+    {
+        strRes += str[j];
+        j++;
+    }
+    <p>@strRes</p>
+}
+
+@helper Spaces(string text)
+{
+    <h4>@text.Replace('|', ' ')</h4>
+}

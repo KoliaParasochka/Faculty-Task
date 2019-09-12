@@ -1,0 +1,895 @@
+﻿/* Main styles */
+
+html, body {
+    float: left;
+    width: 100%;
+    height: 100%;
+    font-family: 'Popins' sans-serif;
+    color: #222;
+}
+
+.wrapper {
+    float: left;
+    width: 100%;
+    min-height: 90%;
+}
+
+/* Layout styles */
+
+.logo {
+    font-size: 2em;
+    float: left;
+    color: #53ade4;
+    font-weight: 600;
+    margin-top: 2px;
+}
+
+.logo:hover{
+    color: #53ade4;
+}
+
+.cont {
+    padding-top: 30px;
+}
+
+.bg-col {
+    background-color: #25252D;
+}
+
+.menu {
+    border: 1px solid #30303c;
+    background-color: #25252D;
+    padding: 3px 8px 3px 8px;
+}
+
+.menu img {
+    width: 25px;
+    height: 25px;
+}
+
+.navbar-nav {
+    margin-top: 1px;
+}
+.navbar-nav li a {
+    color: aliceblue;
+    font-size: 1.2em;
+    font-weight: 600;
+    transition: all 0.3s;
+}
+
+.navbar-nav li a:hover{
+    color: #53ade4;
+    background-color: #25252D;
+    transition: all 0.3s;
+}
+
+footer {
+    height: 80px;
+    width: 100%;
+    color: white;
+    text-align: center;
+    background-color: #25252D;
+    float: left;
+    padding-top: 25px;
+}
+
+/* Index */
+
+.bg-img, bg-img-about {
+    float: left;
+    padding-top: 320px;
+    padding-bottom: 320px;
+    text-align: center;
+    height: 110%;
+    width: 100%;
+    background-image: url("BackImg/friends.jpg");
+}
+
+.head-pos {
+    line-height: 230%;
+    font-weight: 500;
+    text-align: center;
+    color: #25252D;
+}
+
+.bg-img h2, bg-img-about h2 {
+    font-size: 2.5em;
+}
+
+.bg-img h2,
+.bg-img h3,
+bg-img-about h2,
+bg-img-about h3{
+    color: white;
+    font-weight: 600;
+}
+
+/*.bg-course {
+    width: 100%;
+    background-color: #f2f2f2;
+}*/
+
+.courses {
+    float: left;
+    width: 100%;
+}
+
+.courses {
+    float: left;
+    width: 100%;
+}
+
+.bg-col-index {
+    background-color: #f2f2f2;
+}
+
+.courses section {
+    float: left;
+    min-height: 250px;
+    margin-bottom: 20px;
+    border: 1px solid #d6d6d6;
+    border-radius: 3px;
+    padding: 5px;
+    background-color: white;
+}
+
+.courses section p {
+    height: 140px;
+    text-indent: 1.2em;
+}
+
+.courses section h4 {
+    height: 30px;
+    color: #25252D;
+    text-align: center;
+}
+
+.right { float: right; }
+.left {float: left;}
+
+.menu-forms {
+    background-color: #25252D;
+}
+
+.menu-forms,
+.menu-search-form {
+    float: left;
+    width: 100%;
+    height: 50px;
+    border-bottom: 1px solid silver;
+    padding: 7px 0px 7px 0px;
+}
+.menu-forms form {
+    width: 100%;
+}
+
+
+
+.left-form input{
+    float: right;
+}
+
+.left-form select {
+    float:left;
+    margin-left: 5px;
+    border-radius: 3px;
+    font-size: 1.2em;
+    padding: 6px;
+}
+
+h3 {
+    margin-bottom: 0;
+}
+
+/******/
+
+.right-form  form input {
+    float: left;
+    margin-left: 5px;
+}
+
+.right-form input[type='text'] {
+    font-size: 1.2em;
+    padding: 6px;
+    border-radius: 3px;
+    border: none;
+}
+
+/* ShowCourses */
+
+.menu-search-form {
+    margin-top: 50px;
+    background-color: #30303c;
+}
+
+
+.search-form {
+    width: 70%;
+    float: left;
+    margin-left: 5%;
+}
+
+.search-form form input {
+    float: left;
+    margin-left: 5px;
+    
+}
+
+.search-form input[type='text'] {
+    font-size: 1.2em;
+    padding: 6px;
+    border-radius: 3px;
+
+    width: 50%;
+    border: none;
+}
+
+/* Read */
+
+.text {
+    font-size: 1.2em;
+    text-indent: 2.5em;
+}
+
+.course-info {
+    width: 100%;
+    height: 100px;
+    float: left;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+}
+
+.course-info span,
+.course-info form{
+    float: left;
+    margin-top: 10px;
+    clear: both;
+}
+
+.course-info form {
+    height: 30px;
+    margin-bottom: 20px;
+}
+
+.course-info form input {
+    float: left;
+}
+
+/** Index (Manage) **/
+.person-info {
+    float: left;
+    width: 100%;
+    clear: both;
+    height: 100px;
+}
+
+.person-info span {
+    float: left;
+    clear: both;
+}
+
+
+.stud-list {
+    float: left;
+    width: 100%;
+    min-height: 100px;
+}
+
+.element {
+    width: 100%;
+    float: left;
+}
+
+.element span {
+    float: left;
+    text-align: center;
+}
+
+/* Registration */
+
+.I-tacher {
+    float: left;
+    width: 100%;
+    margin-bottom: 20px;
+}
+.I-tacher label {float: left; margin-left: 5px;}
+.I-tacher input {
+    float: left;
+    margin-top: 10px;
+    margin-left: 17%;
+}
+
+/* Teacher */
+.student-info,
+.admin-courses,
+.teach-info
+.admin-students{
+    float: left;
+    width: 100%;
+    margin-bottom: 20px;
+    border-top: 1px solid silver;
+}
+
+.grade input{
+    font-size: 0.8em;
+    padding: 1px;
+}
+
+.student-info span,
+.teach-info span {
+    width: 30%;
+    margin-left: 3.3%;
+    float: left;
+    padding: 0px 5px 0px 5px;
+    border-bottom: 1px solid silver;
+}
+
+/** (Admin) Index **/
+
+.error-pos {
+    color: #d43737;
+    font-weight: 700;
+    text-align: center;
+}
+
+.admin-courses span {
+    width: 15%;
+    margin-left: 4.16%;
+    float: left;
+    padding: 0px 5px 0px 5px;
+    border-bottom: 1px solid silver;
+}
+
+.admin-container {
+    width: 90%;
+    min-height: 60%;
+}
+
+.admin-students span, .admin-t span {
+    float: left;
+   
+    padding: 0px 5px 0px 5px;
+    border-bottom: 1px solid silver;
+}
+
+.admin-t {
+    margin-left: 10%;
+    width: 100%;
+    margin-bottom: 20px;
+    border-top: 1px solid silver;
+}
+
+.admin-students, admin-t {
+    border-top: 1px solid silver;
+    min-height: 100px;
+    float: left;
+    margin-bottom: 50px;
+}
+
+.btn-add {
+    float: right;
+    margin-top: 10px;
+    margin-right: 5%;
+}
+
+.btn-change {
+    border: none;
+    background-color: white;
+    padding: 0;
+    color: dodgerblue;
+    float: left;
+    margin-left: 10px;
+    text-decoration: underline;
+}
+
+.btn-change:hover {
+    color: cadetblue;
+}
+
+.course-information {
+    float: left;
+    width: 100%;
+    min-height: 50px;
+}
+
+.course-information span {
+    float: left;
+    clear: both;
+}
+
+.form-method {
+    float: left;
+    box-sizing:border-box;
+    margin-left: 10px;
+}
+
+/* About */
+.img-styles {
+    width: 100%;
+    height: 100%;
+}
+
+/* AddCourse */
+/* Adaptility */
+@media(min-width: 2000px) and (max-width: 2500px) {
+    .carousel-caption {
+        top: 40%;
+    }
+
+    .admin-students span {
+        width: 20%;
+        margin-left: 4%;
+    }
+
+    .courses section {
+        width: 20%;
+        margin-left: 4%;
+    }
+
+    .right-form {
+        width: 25%; 
+        float: right;
+    }
+
+    .left-form {
+        float: left;
+        width: 35%;
+        margin-left: 2%;
+    }
+
+    .element span {
+        width: 25%;
+    }
+}
+
+@media(min-width: 1700px) and (max-width: 1999px) {
+    .carousel-caption {
+        top: 40%;
+    }
+
+    .admin-students span {
+        width: 20%;
+        margin-left: 4%;
+    }
+
+    .courses section {
+        width: 20%;
+        margin-left: 4%;
+    }
+
+    .right-form {
+        width: 25%;
+        float: right;
+    }
+
+    .left-form {
+        float: left;
+        width: 35%;
+        margin-left: 2%;
+    }
+
+    .element span {
+        width: 25%;
+    }
+}
+
+@media(min-width: 1500px) and (max-width: 1699px) {
+    .carousel-caption {
+        top: 40%;
+    }
+
+    .admin-students span {
+        width: 20%;
+        margin-left: 4%;
+    }
+
+    .courses section {
+        width: 20%;
+        margin-left: 4%;
+    }
+
+    .right-form {
+        width: 25%;
+        float: right;
+    }
+
+    .left-form {
+        float: left;
+        width: 35%;
+        margin-left: 2%;
+    }
+
+    .element span {
+        width: 25%;
+    }
+}
+
+@media(min-width: 1300px) and (max-width: 1499px) {
+    .carousel-caption {
+        top: 40%;
+    }
+
+    .admin-students span {
+        width: 40%;
+        margin-left: 5%;
+    }
+
+    .admin-courses span {
+        width: 30%;
+        margin-left: 2.5%;
+        
+    }
+
+    .admin-date {
+        display: none;
+    }
+
+    .courses section {
+        width: 20%;
+        margin-left: 4%;
+    }
+
+    .right-form {
+        width: 80%;
+        float: left;
+        margin-left: 3%;
+    }
+
+    .left-form {
+        display: none;
+    }
+
+    .element span {
+        width: 25%;
+    }
+}
+
+@media(min-width: 1100px) and (max-width: 1399px) {
+    .carousel-caption {
+        top: 40%;
+    }
+
+    .admin-students span {
+        width: 40%;
+        margin-left: 5%;
+    }
+
+    .admin-courses span {
+        width: 30%;
+        margin-left: 2.5%;
+    }
+
+    .admin-date {
+        display: none;
+    }
+
+    .courses section {
+        width: 30%;
+        margin-left: 2.5%;
+    }
+
+    .right-form {
+        width: 80%;
+        float: left;
+        margin-left: 3%;
+    }
+
+    .left-form {
+        display: none;
+    }
+
+    .element span {
+        width: 25%;
+    }
+}
+
+@media(min-width: 995px) and (max-width: 1099px) {
+    .carousel-caption {
+        top: 40%;
+    }
+
+    .I-tacher input {
+        margin-left: 17%;
+    }
+    .admin-students span {
+        width: 40%;
+        margin-left: 5%;
+    }
+
+    .admin-courses span {
+        width: 30%;
+        margin-left: 2.5%;
+    }
+
+    .admin-date {
+        display: none;
+    }
+
+    .courses section {
+        width: 30%;
+        margin-left: 2.5%;
+    }
+
+    .right-form {
+        width: 80%;
+        float: left;
+        margin-left: 3%;
+    }
+
+    .left-form {
+        display: none;
+    }
+
+    .element span {
+        width: 25%;
+    }
+}
+
+@media(min-width: 900px) and (max-width: 994px) {
+    .carousel-caption {
+        top: 40%;
+    }
+
+    .I-tacher input {
+        margin-left: 0%;
+    }
+
+    .admin-students span {
+        width: 40%;
+        margin-left: 5%;
+    }
+
+    .admin-courses span {
+        width: 30%;
+        margin-left: 2.5%;
+    }
+
+    .admin-date {
+        display: none;
+    }
+
+    .courses section {
+        width: 30%;
+        margin-left: 2.5%;
+    }
+
+    .right-form {
+        width: 80%;
+        float: left;
+        margin-left: 3%;
+    }
+
+    .left-form {
+        display: none;
+    }
+
+    .element span {
+        width: 25%;
+    }
+}
+
+@media(min-width: 700px) and (max-width: 899px) {
+    .carousel-caption {
+        top: 30%;
+    }
+
+    .I-tacher input {
+        margin-left: 0%;
+       
+    }
+
+    .admin-students span {
+        width: 40%;
+        margin-left: 5%;
+    }
+
+    .admin-courses span {
+        width: 30%;
+        margin-left: 2.5%;
+    }
+
+    .admin-date {
+        display: none;
+    }
+
+    .student-info span {
+        width: 50%;
+        margin: 0;
+        text-align: center;
+    }
+
+    .name { display: none; }
+
+    .courses section {
+        width: 40%;
+        margin-left: 6.6%;
+    }
+
+    .right-form {
+        width: 80%;
+        float: left;
+        margin-left: 3%;
+    }
+
+    .left-form {
+        display: none;
+    }
+
+    .date {
+        display: none;
+    }
+
+    .element span {
+        width: 50%;
+    }
+    
+}
+
+@media(min-width: 500px) and (max-width: 699px) {
+    #carousel { display: none; }
+
+    .I-tacher input {
+        margin-left: 0%;
+        margin-top: 5px;
+    }
+
+    .admin-students span {
+        width: 40%;
+        margin-left: 5%;
+    }
+
+    .admin-courses span {
+        width: 50%;
+        margin-left: 0%;
+        
+    }
+
+    .menu-forms{
+        border-top: 1px solid silver;
+        margin-top: 53px;
+    }
+
+    .right-form {
+        width: 80%;
+        float: left;
+        margin-left: 3%;
+    }
+
+    .date,
+    .teacher-surname,
+    .left-form,
+    .admin-date,
+    .bg-img {
+        display: none;
+    }
+
+    .element span {
+        width: 50%;
+    }
+
+    .student-info span {
+        width: 50%;
+        margin: 0;
+        text-align: center;
+    }
+}
+
+@media(min-width: 400px) and (max-width: 499px) {
+    #carousel {
+        display: none;
+    }
+
+    .I-tacher input {
+        margin-left: 0%;
+        margin-top: 5px;
+    }
+
+    .admin-students span {
+        width: 40%;
+        margin-left: 5%;
+    }
+
+    .admin-courses { 
+        width: 80%; 
+        margin-left: 10%;
+
+    }
+    .admin-courses span {
+        width: 50%;
+        height: 42px;
+        margin-left: 0%;
+    }
+
+    .bg-img {
+        display: none;
+    }
+
+    .menu-forms {
+        border-top: 1px solid silver;
+        margin-top: 53px;
+    }
+
+    .right-form {
+        width: 80%;
+        float: left;
+        margin-left: 3%;
+    }
+
+    .date,
+    .teacher-surname,
+    .left-form {
+        display: none;
+    }
+
+    .admin-date {
+        display: none;
+    }
+
+    .element span {
+        width: 50%;
+    }
+}
+
+@media(min-width: 300px) and (max-width: 399px) {
+    #carousel {
+        display: none;
+    }
+
+    .I-tacher input {
+        margin-left: 0%;
+        margin-top: 5px;
+    }
+
+    .admin-students span {
+        width: 40%;
+        margin-left: 5%;
+    }
+
+    .admin-courses {
+        width: 80%;
+        margin-left: 10%;
+    }
+
+    .admin-courses span {
+        width: 50%;
+        height: 42px;
+        margin-left: 0%;
+    }
+
+    .menu-forms {
+        border-top: 1px solid silver;
+        margin-top: 53px;
+    }
+
+    .right-form {
+        width: 100%;
+        float: left;
+
+    }
+
+    .head-pos {
+        line-height: 150%;
+        font-size: 1.5em;
+    }
+
+    .date,
+    .teacher-surname,
+    .left-form,
+    .admin-date,
+    .bg-img {
+        display: none;
+    }
+
+    .element span {
+        width: 50%;
+    }
+}
+
+@media(min-width: 770px) {
+    
+}
+
+@media(max-width: 769px) {
+    
+    
+} 

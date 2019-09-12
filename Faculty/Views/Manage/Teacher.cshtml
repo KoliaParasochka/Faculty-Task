@@ -1,0 +1,75 @@
+﻿@using Faculty.Storages
+@using ProjectDatabase.Models
+
+@model ProjectDatabase.Models.IndexViewModel
+@{
+    ViewBag.Title = "Teacher";
+}
+<br /><br /><br />
+
+<h4 class="head-pos">Ваша учетная запись</h4>
+<hr />
+<div class="container">
+    <div class="teacher-info">
+        <div class="person-info">
+            <span><b>Имя: </b>@ViewBag.Teacher.Name</span>
+            <span><b>Фамилия: </b>@ViewBag.Teacher.Surname</span>
+            <span><b>Ваша почта: </b>@ViewBag.Teacher.Email</span>
+        </div>
+        @foreach (var el in ViewBag.Teacher.Courses)
+        {
+            if (!el.IsRemoved)
+            {
+                <h4 class="head-pos">@el.Name</h4>
+                <div class="student-info">
+                    @PrintStudents(el, el.CourseId)
+                </div>
+            }
+        }
+        <br /><br />
+    </div>
+</div>
+@helper PrintStudents(Course course, int courseId)
+{
+    Storage storage = new Storage();
+    List<Course> courses = storage.GetCoursesAndStudents();
+    var TakeCourse = from el in courses
+                     where el.CourseId == course.CourseId
+                     select el;
+    Course mycourse = TakeCourse.FirstOrDefault();
+    <b>
+        <span class="name">Имя</span>
+        <span>Фамилия</span>
+        <span>Оценка</span>
+    </b>
+    foreach (var el in mycourse.Students)
+    {
+        <span class="name">@el.Name</span>
+        <span>@el.Surname</span>
+        <span class="grade">
+            @using (Html.BeginForm("SetMark", "Manage", FormMethod.Post))
+            {
+                <input type="hidden" name="CourseId" value=@courseId />
+                <input type="hidden" name="StudentId" value=@el.Id />
+                <input type="text" name="Grade" placeholder="Оценка" value=@GetGrade(courseId, el.Id) />
+                <input type="submit" value="Оценить" />
+            }
+        </span>
+    }
+}
+
+
+@helper GetGrade(int courseId, int studentId)
+{
+    Storage storage = new Storage();
+    Mark mark = storage.GetMark(courseId, studentId);
+    if (mark != null)
+    {
+        @mark.Grade
+    }
+    else
+    {
+        
+    }
+
+}

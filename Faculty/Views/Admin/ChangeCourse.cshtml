@@ -1,0 +1,74 @@
+﻿@using ProjectDatabase.Models
+@model CreateCourse
+@{
+    ViewBag.Title = "Изменить курс";
+}
+<br /><br /><br />
+<div class="container">
+    @using (Html.BeginForm("ChangeCourse", "Admin", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+        <h4>Создание курса</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @*<div class="form-group">
+            @Html.LabelFor(m => m.Name, new { @class = "col-md-2 control-label" })
+            <div class="col-md-4">*@
+                @Html.TextBoxFor(m => m.Name, new { @class = "form-control", @type = "hidden" })
+                @*@Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+        <div class="form-group">
+            @Html.LabelFor(m => m.Text, new { @class = "col-md-2 control-label" })
+            <div class="col-md-4">
+                @Html.TextAreaFor(m => m.Text, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Text, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.StartDate, new { @class = "col-md-2 control-label" })
+            <div class="col-md-4">
+                @Html.TextBoxFor(m => m.StartDate, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.StartDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.FinishDate, new { @class = "col-md-2 control-label" })
+            <div class="col-md-4">
+                @Html.TextBoxFor(m => m.FinishDate, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.FinishDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.TeacherEmail, new { @class = "col-md-2 control-label" })
+            <div class="col-md-4">
+                @Html.TextBoxFor(m => m.TeacherEmail, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.TeacherEmail, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" class="btn btn-default" value="Редактировать" />
+            </div>
+        </div>
+    }
+    @if (!ViewBag.IsValid)
+    {
+        <h4 class="error-pos">@ViewBag.Message</h4>
+    }
+    <div class="teach-info">
+            <b>
+                <span>Имя</span>
+                <span>Фамилия</span>
+                <span>Почта</span>
+            </b>
+            @foreach (var el in ViewBag.Teachers)
+            {
+                <span>@el.Name</span>
+                <span>@el.Surname</span>
+                <span>@el.Email</span>
+            }
+        </div>
+    
+</div>

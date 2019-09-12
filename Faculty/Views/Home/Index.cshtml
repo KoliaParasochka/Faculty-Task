@@ -1,0 +1,208 @@
+﻿@using Faculty.FileManage
+
+@{
+    ViewBag.Title = "Главная";
+}
+
+<div id="carousel" class="carousel slide">
+    <ol class="carousel-indicators">
+        <li class="active" data-target="#carousel" data-slide="0"></li>
+        <li data-target="#carousel" data-slide="1"></li>
+        <li data-target="#carousel" data-slide="2"></li>
+    </ol>
+    <div class="carousel-inner">
+        <div class="item active">
+            <img src="~/Content/BackImg/programming.jpg" />
+            <div class="carousel-caption">
+                <h2><b>Сomputer Information Technologies</b></h2>
+                <h3>Мы научим Вас программировать</h3>
+            </div>
+        </div>
+        <div class="item">
+            <img src="~/Content/BackImg/business.jpg" />
+            <div class="carousel-caption">
+                <h2><b>Станьте успешным предпринимателем</b></h2>
+                <h3>Мы поможем Вам продвинуть свой стартап</h3>
+            </div>
+        </div>
+        <div class="item">
+            <img src="~/Content/BackImg/students.jpg" />
+            <div class="carousel-caption">
+                <h2><b>У нас отличный коллектив</b></h2>
+                <h3>Вы сможете найти много новых друзей</h3>
+            </div>
+        </div>
+    </div>
+    <a href="#carousel" class="left carousel-control" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left"></span>
+    </a>
+    <a href="#carousel" class="right carousel-control" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right"></span>
+    </a>
+</div>
+
+    <div class="menu-forms">
+        <div class="left-form">
+            @using (Ajax.BeginForm("Index", new { @class = "left-form" }, new AjaxOptions { UpdateTargetId = "results1" }))
+            {
+                <select name="IncrOrDecr">
+                    <option>По убыванию</option>
+                    <option>По возростанию</option>
+                </select>
+
+                <select name="How">
+                    <option>По имени</option>
+                    <option>По продолжительности</option>
+                    <option>По количеству студентов</option>
+                </select>
+                <input type="submit" value="Сортировать" class="btn btn-primary" />
+            }
+
+        </div>
+        <div class="right-form">
+            @using (Ajax.BeginForm("ShowCourses", new { @class = "right-form" }, new AjaxOptions { UpdateTargetId = "results" }))
+            {
+                <input type="text" name="Name" placeholder="Поиск" />
+                <input type="submit" value="Найти" class="btn btn-primary" />
+            }
+        </div>
+    </div>
+    
+    <h3 class="head-pos bg-col-index">Зарегистрируйтесь на наши курсы</h3>
+    <article class="courses bg-col-index">
+        @foreach (var el in ViewBag.Courses)
+        {
+
+            if (!el.IsRemoved)
+            {
+                <section>
+                    @Spaces(el.Name)
+                    @GetFirstText(el.Text)
+                    @using (Html.BeginForm("Read", "Home", FormMethod.Post))
+                    {
+                    <input type="hidden" value=@el.CountStudents name="countStud" />
+                    <input type="hidden" value=@el.Teacher.Name name="TeacherName" />
+                    <input type="hidden" value=@el.Teacher.Surname name="TeacherSurname" />
+                    <input type="hidden" value=@el.StartDate name="StartDate" />
+                    <input type="hidden" value=@el.FinishDate name="FinishDate" />
+                    <input type="hidden" value=@el.Name name="Name" />
+                    <button name="Text" value="@el.Text" class="btn btn-primary right">Подробнее</button>
+                    }
+                    
+                </section>
+            }
+        }
+     </article>
+
+
+
+@helper GetFirstText(string Text)
+{
+    string txt = string.Empty;
+    string str = string.Empty;
+    for (int i = 0; i < Text.Length; i++)
+    {
+        str += Text[i];
+    }
+    int j = 0;
+    string strRes = string.Empty;
+    while (j < 200 && ( j <= str.Length-1))
+    {
+        strRes += str[j];
+        j++;
+    }
+    <p>@strRes</p>
+}
+
+@helper Spaces(string text)
+{
+    <h4>@text.Replace('|', ' ')</h4>
+}
+
+@helper SpacesDel(string text)
+{
+text = text.Replace(' ', '|');
+}
+
+
+
+@Scripts.Render("~/scripts/jquery-1.10.2.js")
+@Scripts.Render("~/scripts/jquery.unobtrusive-ajax.js")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@*@using ProjectDatabase.Models
+    @model List<ProjectDatabase.Models.Course>
+
+    <h3 class="head-pos">Зарегистрируйтесь на наши курсы</h3>
+    <article class="courses">
+        @for (int i = 0; i < Model.Count; i++)
+        {
+            <section>
+                @Spaces(Model[i].Name)
+                @GetFirstText(Model[i].Text)
+                @using (Html.BeginForm("Read", "Home", FormMethod.Post))
+                {
+                    <input type="hidden" value=@Model[i].StartDate name="StartDate" />
+                    <input type="hidden" value=@Model[i].FinishDate name="FinishDate" />
+                    <input type="hidden" value=@Model[i].Name name="Name" />
+                    <button name="Text" value="@Model[i].Text" class="btn btn-primary right">Подробнее</button>
+                }
+            </section>
+        }
+    </article>
+
+    @helper GetFirstText(string Text)
+    {
+        string txt = string.Empty;
+        string str = string.Empty;
+        for (int i = 0; i < Text.Length; i++)
+        {
+            str += Text[i];
+        }
+        int j = 0;
+        string strRes = string.Empty;
+        while (j < 200)
+        {
+            strRes += str[j];
+            j++;
+        }
+        <p>@strRes</p>
+    }
+
+    @helper Spaces(string text)
+    {
+        <h4>@text.Replace('|', ' ')</h4>
+    }*@
