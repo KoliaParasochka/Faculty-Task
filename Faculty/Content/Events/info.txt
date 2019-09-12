@@ -4424,3 +4424,54 @@ gets a size of teacher list (starts method storage.GetTeacherList().Count) - act
  user:  found the count of students on one course and save it - action Index, HomeController 
 03.09.2019 19:46:52
  user:  taken courses and printed it - action Index, HomeController
+12.09.2019 19:16:55
+ user:  get courses with teachers (start th method GetCoursesAndTeachers())
+ - method DelSpases, HomeController
+12.09.2019 19:16:55
+ user:  found the count of students on one course and save it - action Index, HomeController 
+12.09.2019 19:16:55
+ user:  taken courses and printed it - action Index, HomeController
+12.09.2019 19:20:25
+ user:  get courses with teachers (start th method GetCoursesAndTeachers())
+ - method DelSpases, HomeController
+12.09.2019 19:20:25
+ user:  found the count of students on one course and save it - action Index, HomeController 
+12.09.2019 19:20:25
+ user:  taken courses and printed it - action Index, HomeController
+12.09.2019 19:20:37
+ user: kolian@mail.ru get courses with teachers (start th method GetCoursesAndTeachers())
+ - method DelSpases, HomeController
+12.09.2019 19:20:37
+ user: kolian@mail.ru found the count of students on one course and save it - action Index, HomeController 
+12.09.2019 19:20:37
+ user: kolian@mail.ru taken courses and printed it - action Index, HomeController
+12.09.2019 19:20:39
+ == User: kolian@mail.ru Go to personal area, action Index, ManageController
+12.09.2019 19:20:39
+ ** admin: gets courses and teachers (starts method storage.GetCoursesAndTeachers())
+gets students (starts method storage.GetStudents())
+gets the list of new teachers (storage.GetTeacherList())
+gets a size of teacher list (starts method storage.GetTeacherList().Count) - action Index,  AdminController
+12.09.2019 19:20:54
+ user: kolian@mail.ru get courses with teachers (start th method GetCoursesAndTeachers())
+ - method DelSpases, HomeController
+12.09.2019 19:20:54
+ user: kolian@mail.ru found the count of students on one course and save it - action Index, HomeController 
+12.09.2019 19:20:54
+ user: kolian@mail.ru taken courses and printed it - action Index, HomeController
+12.09.2019 19:21:27
+ user: kolian@mail.ru opened course to be aquqinted with it - action Read, HomeController
+12.09.2019 19:21:28
+ user: kolian@mail.ru get courses with teachers (start th method GetCoursesAndTeachers())
+ - method DelSpases, HomeController
+12.09.2019 19:21:28
+ user: kolian@mail.ru found the count of students on one course and save it - action Index, HomeController 
+12.09.2019 19:21:28
+ user: kolian@mail.ru taken courses and printed it - action Index, HomeController
+12.09.2019 19:22:32
+ user:  get courses with teachers (start th method GetCoursesAndTeachers())
+ - method DelSpases, HomeController
+12.09.2019 19:22:32
+ user:  found the count of students on one course and save it - action Index, HomeController 
+12.09.2019 19:22:32
+ user:  taken courses and printed it - action Index, HomeController
