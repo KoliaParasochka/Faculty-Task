@@ -2,6 +2,7 @@
 using Faculty.Storages;
 using Microsoft.AspNet.Identity;
 using ProjectDatabase.Models;
+using ProjectDatabase.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,8 @@ namespace Faculty.Controllers
 {
     public class HomeController : Controller
     {
+        StudentRepository studentRepository = new StudentRepository();
+        CourseRepository courseRepository = new CourseRepository();
         Storage storage;
         FileManager fileManager = new FileManager();
 
@@ -75,9 +78,11 @@ namespace Faculty.Controllers
         /// <returns></returns>
         public ActionResult Index()
         {
+            
             List<Course> courses = DelSpases();
             courses = FindCountStudents(courses);
             ViewBag.Courses = courses;
+            
             WriteToInfo("user: " + User.Identity.Name + " taken courses and printed it - action Index, HomeController");
             return View("Index");
         }
@@ -256,14 +261,44 @@ namespace Faculty.Controllers
         /// <param name="StartDate"></param>
         /// <param name="FinishDate"></param>
         /// <returns></returns>
+        //[HttpPost]
+        //public ActionResult Read(string Name, string Text, string StartDate, string FinishDate, 
+        //    string TeacherSurname, string TeacherName, string countStud)
+        //{
+        //    if (User.Identity.IsAuthenticated)
+        //    {
+        //        var userId = User.Identity.GetUserId();
+        //        var person = storage.GetStudent(storage.GetEmail(userId));
+        //        if (person != null)
+        //        {
+        //            ViewBag.CanRegister = true;
+        //        }
+        //        else
+        //        {
+        //            ViewBag.CanRegister = false;
+        //        }
+        //    }
+        //    else
+        //    {
+        //        ViewBag.CanRegister = true;
+        //    }
+
+        //    ViewBag.Name = Name.Replace('|', ' ');
+        //    ViewBag.Content = Text;
+        //    ViewBag.Teacher = TeacherName + " " + TeacherSurname;
+        //    ViewBag.StartDate = StartDate;
+        //    ViewBag.FinishDate = FinishDate;
+        //    ViewBag.CountStud = countStud;
+        //    WriteToInfo("user: " + User.Identity.Name + " opened course to be aquqinted with it - action Read, HomeController");
+        //    return View();
+        //}
+
         [HttpPost]
-        public ActionResult Read(string Name, string Text, string StartDate, string FinishDate, 
-            string TeacherSurname, string TeacherName, string countStud)
+        public ActionResult Read(int id)
         {
             if (User.Identity.IsAuthenticated)
             {
-                var userId = User.Identity.GetUserId();
-                var person = storage.GetStudent(storage.GetEmail(userId));
+                var person = studentRepository.Find(s => s.Courses, s => s.Email == User.Identity.Name);
                 if (person != null)
                 {
                     ViewBag.CanRegister = true;
@@ -277,13 +312,9 @@ namespace Faculty.Controllers
             {
                 ViewBag.CanRegister = true;
             }
-            
-            ViewBag.Name = Name.Replace('|', ' ');
-            ViewBag.Content = Text;
-            ViewBag.Teacher = TeacherName + " " + TeacherSurname;
-            ViewBag.StartDate = StartDate;
-            ViewBag.FinishDate = FinishDate;
-            ViewBag.CountStud = countStud;
+            Course course = courseRepository.Find(p => p.Students, p => p.CourseId == id).First();
+            ViewBag.CountStud = course.Students.Count;
+            ViewBag.Course = courseRepository.Get(id);
             WriteToInfo("user: " + User.Identity.Name + " opened course to be aquqinted with it - action Read, HomeController");
             return View();
         }

@@ -46,8 +46,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="ProjectDatabase">
-      <HintPath>..\ProjectDatabase\obj\Debug\ProjectDatabase.dll</HintPath>
+    <Reference Include="ProjectDatabase, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\ProjectDatabase\bin\Debug\ProjectDatabase.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />

@@ -12,8 +12,6 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using ProjectDatabase.EF;
-using ProjectDatabase.Models;
-//using ProjectDatabase.EF;
 
 namespace Faculty
 {

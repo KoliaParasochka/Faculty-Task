@@ -3,14 +3,14 @@
     ViewBag.Title = ViewBag.Name;
 }
 <br /><br /><br />
-<h2 class="head-pos">@ViewBag.Name</h2>
+<h2 class="head-pos">@ViewBag.Course.Name</h2>
 <div class="container">
-    <p class="text">@ViewBag.Content</p>
+    <p class="text">@ViewBag.Course.Text</p>
     <div class="course-info">
         <span><b>Количество студентов:</b> @ViewBag.CountStud</span>
-        <span><b>Преподаватель:</b> @ViewBag.Teacher</span>
-        <span><b>Начало курса:</b> @ViewBag.StartDate</span>
-        <span><b>Завершение курса:</b> @ViewBag.FinishDate</span>
+        <span><b>Преподаватель:</b> @ViewBag.Course.Teacher.Surname @ViewBag.Course.Teacher.Name</span>
+        <span><b>Начало курса:</b> @ViewBag.Course.StartDate</span>
+        <span><b>Завершение курса:</b> @ViewBag.Course.FinishDate</span>
         @if (ViewBag.CanRegister)
         {
             using (Html.BeginForm("Registration", "Home", FormMethod.Post))
