@@ -12,55 +12,62 @@ namespace ProjectDatabase.Repositories
 {
     public class MarkRepository : IRepository<Mark>
     {
+        ApplicationDbContext db;
+
+        public MarkRepository()
+        {
+            db = new ApplicationDbContext("DefaultConnection");
+        }
+
+        public MarkRepository(ApplicationDbContext context)
+        {
+            db = context;
+        }
+
+        public IEnumerable<Mark> GetAll()
+        {
+            return db.Marks.ToList();
+        }
+
         public void Create(Mark item)
         {
-            using(ApplicationDbContext db = new ApplicationDbContext())
-            {
-                db.Marks.Add(item);
-                db.SaveChanges();
-            }
+            db.Marks.Add(item);
+            db.SaveChanges();
         }
 
         public void Delete(int id)
         {
-            using (ApplicationDbContext db = new ApplicationDbContext())
-            {
-                Mark mark = db.Marks.Find(id);
-                if (mark != null)
-                    db.Marks.Remove(mark);
-            }
+            Mark mark = db.Marks.Find(id);
+            if (mark != null)
+                db.Marks.Remove(mark);
+            db.SaveChanges();
+           
         }
 
         public IEnumerable<Mark> Find<C>(System.Linq.Expressions.Expression<Func<Mark, ICollection<C>>> path, Func<Mark, bool> predicate)
         {
-            using (ApplicationDbContext db = new ApplicationDbContext())
-            {
-                return db.Marks.Include(path).Where(predicate).ToList();
-            }
+            return db.Marks.Where(predicate).ToList();
+        }
+
+        public IEnumerable<Mark> Find(Func<Mark, bool> predicate)
+        {
+            return db.Marks.Where(predicate).ToList();
         }
 
         public Mark Get(int id)
         {
-            using (ApplicationDbContext db = new ApplicationDbContext())
-            {
-                return db.Marks.Find(id);
-            }
+            return db.Marks.Find(id);
         }
 
         public IEnumerable<Mark> GetAll<C>(System.Linq.Expressions.Expression<Func<Mark, ICollection<C>>> path)
         {
-            using (ApplicationDbContext db = new ApplicationDbContext())
-            {
-                return db.Marks.Include(path).ToList();
-            }
+            return db.Marks.Include(path).ToList();
         }
 
         public void Update(Mark item)
         {
-            using (ApplicationDbContext db = new ApplicationDbContext())
-            {
-                db.Entry(item).State = EntityState.Modified;
-            }
+            db.Entry(item).State = EntityState.Modified;
+            db.SaveChanges();
         }
     }
 }

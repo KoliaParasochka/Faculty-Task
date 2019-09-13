@@ -1,6 +1,7 @@
 ﻿using Faculty.FileManage;
 using Faculty.Storages;
 using Microsoft.AspNet.Identity;
+using ProjectDatabase.Interfaces;
 using ProjectDatabase.Models;
 using ProjectDatabase.Repositories;
 using System;
@@ -13,14 +14,14 @@ namespace Faculty.Controllers
 {
     public class HomeController : Controller
     {
-        StudentRepository studentRepository = new StudentRepository();
-        CourseRepository courseRepository = new CourseRepository();
+        IUnitOfWork database;
         Storage storage;
         FileManager fileManager = new FileManager();
 
         public HomeController()
         {
             storage = new Storage();
+            database = new EFUnitOfWork("DefaultConnection");
         }
 
         public HomeController(Storage stor)
@@ -34,7 +35,7 @@ namespace Faculty.Controllers
             result += "\n " + message + "\n";
             string fullPath = Server.MapPath("~/Content/Events/info.txt");
             fileManager.SaveContent(result, fullPath);
-        }      
+        }
 
         /// <summary>
         /// This method changes spaces 
@@ -43,7 +44,7 @@ namespace Faculty.Controllers
         /// <returns></returns>
         private List<Course> DelSpases()
         {
-            List<Course> courses = storage.GetCoursesAndTeachers();
+            List<Course> courses = (List<Course>)database.Courses.GetAll();
             foreach (var el in courses)
             {
                 el.Name = el.Name.Replace(' ', '|');
@@ -61,7 +62,7 @@ namespace Faculty.Controllers
         /// <returns></returns>
         private List<Course> FindCountStudents(List<Course> courses)
         {
-            List<Course> c = storage.GetCoursesAndStudents();
+            List<Course> c = (List<Course>) database.Courses.GetAll(s => s.Students); /*storage.GetCoursesAndStudents();*/
             for(int i = 0;i < courses.Count; i++)
             {
                 courses[i].CountStudents = storage.GetCountOfStudentsOnCourse(c[i]);
@@ -78,11 +79,7 @@ namespace Faculty.Controllers
         /// <returns></returns>
         public ActionResult Index()
         {
-            
-            List<Course> courses = DelSpases();
-            courses = FindCountStudents(courses);
-            ViewBag.Courses = courses;
-            
+            ViewBag.Courses = database.Courses.GetAll();
             WriteToInfo("user: " + User.Identity.Name + " taken courses and printed it - action Index, HomeController");
             return View("Index");
         }
@@ -200,7 +197,7 @@ namespace Faculty.Controllers
         /// <returns></returns>
         private Course GetCoursesWithName(string Name)
         {
-            List<Course> courses = storage.GetCoursesAndStudents();
+            List<Course> courses = (List<Course>)database.Courses.GetAll(m => m.Students); /*storage.GetCoursesAndStudents();*/
             var course = from el in courses
                          where el.Name == Name
                          select el;
@@ -298,7 +295,7 @@ namespace Faculty.Controllers
         {
             if (User.Identity.IsAuthenticated)
             {
-                var person = studentRepository.Find(s => s.Courses, s => s.Email == User.Identity.Name);
+                var person = database.Students.Find(s => s.Courses, s => s.Email == User.Identity.Name);
                 if (person != null)
                 {
                     ViewBag.CanRegister = true;
@@ -312,9 +309,9 @@ namespace Faculty.Controllers
             {
                 ViewBag.CanRegister = true;
             }
-            Course course = courseRepository.Find(p => p.Students, p => p.CourseId == id).First();
+            Course course = database.Courses.Find(p => p.Students, p => p.CourseId == id).First();
             ViewBag.CountStud = course.Students.Count;
-            ViewBag.Course = courseRepository.Get(id);
+            ViewBag.Course = database.Courses.Get(id);
             WriteToInfo("user: " + User.Identity.Name + " opened course to be aquqinted with it - action Read, HomeController");
             return View();
         }
@@ -326,11 +323,13 @@ namespace Faculty.Controllers
         /// <returns></returns>
         [Authorize]
         [HttpPost]
-        public ActionResult Registration(string Name)
+        public ActionResult Registration(int id)
         {
-            var userId = User.Identity.GetUserId();
-            storage.AddCourseToStudent(Name, userId);
-            WriteToInfo("user: " + User.Identity.Name + " was regirstrated on course '" + Name + "' - action Registration, HomeController");
+            Course course = database.Courses.Get(id);
+            Student student = database.Students.Find(s => s.Courses, s => s.Email == User.Identity.Name).First();
+            student.Courses.Add(course);
+            database.Students.Update(student);
+            //WriteToInfo("user: " + User.Identity.Name + " was regirstrated on course '" + Name + "' - action Registration, HomeController");
             return Redirect("Index");
         }
 

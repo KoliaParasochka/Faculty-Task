@@ -15,7 +15,7 @@
         {
             using (Html.BeginForm("Registration", "Home", FormMethod.Post))
             {
-                <input type="hidden" value="@ViewBag.Name" name="Name" />
+                <input type="hidden" value="@ViewBag.Course.CourseId" name="id" />
                 <input type="submit" value="Зарегистрироваться" class="btn btn-primary" />
             }
         }

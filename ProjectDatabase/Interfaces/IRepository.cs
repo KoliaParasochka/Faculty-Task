@@ -10,6 +10,7 @@ namespace ProjectDatabase.Interfaces
     
     public interface IRepository<T> where T : class
     {
+        IEnumerable<T> GetAll();
         IEnumerable<T> GetAll<C>(Expression<Func<T, ICollection<C>>> path);
         T Get(int id);
         IEnumerable<T> Find<C>(Expression<Func<T, ICollection<C>>> path, Func<T, Boolean> predicate);

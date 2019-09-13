@@ -11,15 +11,18 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using ProjectDatabase.EF;
+using ProjectDatabase.Interfaces;
 //using ProjectDatabase.EF;
 using ProjectDatabase.Models;
+using ProjectDatabase.Repositories;
 
 namespace Faculty.Controllers
 {
     [Authorize]
     public class AccountController : Controller
-    {
-        private Storage storage = new Storage();  
+    {  
+        //private Storage storage = new Storage();
+        private IUnitOfWork repository;
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
         FileManager fileManager = new FileManager();
@@ -34,6 +37,7 @@ namespace Faculty.Controllers
 
         public AccountController()
         {
+            repository = new EFUnitOfWork("DefaultConnection");
         }
 
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
@@ -92,7 +96,8 @@ namespace Faculty.Controllers
                 
                 return View(model);
             }
-            Student student = storage.GetStudent(model.Email);
+            //Student student = storage.GetStudent(model.Email);
+            Student student = repository.Students.Find(s => s.Courses, s => s.Email == model.Email).First();
             if(student != null && student.IsBlocked)
             {
                 ViewBag.Message = "Вы заблокированы :(";
@@ -200,11 +205,14 @@ namespace Faculty.Controllers
                 if (string.IsNullOrEmpty(model.IsTeacher))
                 {
                     Student student = new Student { IsBlocked = false, Name = model.Name, Surname = model.SurName, Email = model.Email };
-                    storage.AddStudent(student);
+                    //storage.AddStudent(student);
+                    repository.Students.Create(student);
                 }
                 else
                 {
+                    Storage storage = new Storage();
                     storage.AddTeacherToList(model);
+
                 }
 
 

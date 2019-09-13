@@ -4624,3 +4624,204 @@ gets a size of teacher list (starts method storage.GetTeacherList().Count) - act
  user:  found the count of students on one course and save it - action Index, HomeController 
 13.09.2019 13:30:41
  user:  taken courses and printed it - action Index, HomeController
+13.09.2019 14:57:57
+ user:  get courses with teachers (start th method GetCoursesAndTeachers())
+ - method DelSpases, HomeController
+13.09.2019 14:57:58
+ user:  found the count of students on one course and save it - action Index, HomeController 
+13.09.2019 14:57:58
+ user:  taken courses and printed it - action Index, HomeController
+13.09.2019 14:58:23
+ user:  get courses with teachers (start th method GetCoursesAndTeachers())
+ - method DelSpases, HomeController
+13.09.2019 14:58:23
+ user:  found the count of students on one course and save it - action Index, HomeController 
+13.09.2019 14:58:23
+ user:  taken courses and printed it - action Index, HomeController
+13.09.2019 14:58:30
+ user:  opened course to be aquqinted with it - action Read, HomeController
+13.09.2019 14:58:33
+ user:  opened course to be aquqinted with it - action Read, HomeController
+13.09.2019 14:58:43
+ user:  opened course to be aquqinted with it - action Read, HomeController
+13.09.2019 14:58:55
+ user:  opened course to be aquqinted with it - action Read, HomeController
+13.09.2019 14:58:57
+ user:  get courses with teachers (start th method GetCoursesAndTeachers())
+ - method DelSpases, HomeController
+13.09.2019 14:58:57
+ user:  found the count of students on one course and save it - action Index, HomeController 
+13.09.2019 14:58:57
+ user:  taken courses and printed it - action Index, HomeController
+13.09.2019 15:32:13
+ user:  taken courses and printed it - action Index, HomeController
+13.09.2019 15:33:55
+ user:  taken courses and printed it - action Index, HomeController
+13.09.2019 15:35:12
+ -- User: b3507480@urhen.com was logined - action login, AccountController
+13.09.2019 15:35:19
+ user: b3507480@urhen.com taken courses and printed it - action Index, HomeController
+13.09.2019 15:35:22
+ == User: b3507480@urhen.com Go to personal area, action Index, ManageController
+13.09.2019 15:35:22
+ == User: b3507480@urhen.com action NoAccess, ManageController
+13.09.2019 15:35:27
+ user: b3507480@urhen.com taken courses and printed it - action Index, HomeController
+13.09.2019 15:35:29
+ user:  taken courses and printed it - action Index, HomeController
+13.09.2019 15:35:46
+ -- User: b3260744@urhen.com was logined - action login, AccountController
+13.09.2019 15:35:51
+ user: b3260744@urhen.com taken courses and printed it - action Index, HomeController
+13.09.2019 15:35:54
+ == User: b3260744@urhen.com Go to personal area, action Index, ManageController
+13.09.2019 15:35:57
+ user: b3260744@urhen.com taken courses and printed it - action Index, HomeController
+13.09.2019 15:35:58
+ user: b3260744@urhen.com opened course to be aquqinted with it - action Read, HomeController
+13.09.2019 15:36:00
+ user: b3260744@urhen.com taken courses and printed it - action Index, HomeController
+13.09.2019 15:36:02
+ == User: b3260744@urhen.com Go to personal area, action Index, ManageController
+13.09.2019 15:38:10
+ user:  taken courses and printed it - action Index, HomeController
+13.09.2019 15:38:23
+ user: b3260744@urhen.com taken courses and printed it - action Index, HomeController
+13.09.2019 15:38:25
+ == User: b3260744@urhen.com Go to personal area, action Index, ManageController
+13.09.2019 15:38:28
+ user: b3260744@urhen.com taken courses and printed it - action Index, HomeController
+13.09.2019 15:38:34
+ user: b3260744@urhen.com opened course to be aquqinted with it - action Read, HomeController
+13.09.2019 15:39:38
+ user: b3260744@urhen.com taken courses and printed it - action Index, HomeController
+13.09.2019 15:39:57
+ == User: b3260744@urhen.com Go to personal area, action Index, ManageController
+13.09.2019 15:39:59
+ user: b3260744@urhen.com taken courses and printed it - action Index, HomeController
+13.09.2019 15:40:03
+ user: b3260744@urhen.com opened course to be aquqinted with it - action Read, HomeController
+13.09.2019 15:40:06
+ user: b3260744@urhen.com taken courses and printed it - action Index, HomeController
+13.09.2019 15:40:11
+ user: b3260744@urhen.com opened course to be aquqinted with it - action Read, HomeController
+13.09.2019 15:42:25
+ user: b3260744@urhen.com taken courses and printed it - action Index, HomeController
+13.09.2019 15:42:30
+ user: b3260744@urhen.com opened course to be aquqinted with it - action Read, HomeController
+13.09.2019 15:42:31
+ user: b3260744@urhen.com taken courses and printed it - action Index, HomeController
+13.09.2019 15:42:32
+ == User: b3260744@urhen.com Go to personal area, action Index, ManageController
+13.09.2019 15:42:34
+ user: b3260744@urhen.com taken courses and printed it - action Index, HomeController
+13.09.2019 15:42:36
+ user: b3260744@urhen.com opened course to be aquqinted with it - action Read, HomeController
+13.09.2019 15:42:37
+ user: b3260744@urhen.com taken courses and printed it - action Index, HomeController
+13.09.2019 15:42:39
+ == User: b3260744@urhen.com Go to personal area, action Index, ManageController
+13.09.2019 15:46:29
+ user: b3260744@urhen.com taken courses and printed it - action Index, HomeController
+13.09.2019 15:46:31
+ == User: b3260744@urhen.com Go to personal area, action Index, ManageController
+13.09.2019 15:46:33
+ user: b3260744@urhen.com taken courses and printed it - action Index, HomeController
+13.09.2019 15:46:34
+ user: b3260744@urhen.com opened course to be aquqinted with it - action Read, HomeController
+13.09.2019 15:46:35
+ user: b3260744@urhen.com taken courses and printed it - action Index, HomeController
+13.09.2019 15:46:36
+ == User: b3260744@urhen.com Go to personal area, action Index, ManageController
+13.09.2019 15:46:38
+ user: b3260744@urhen.com taken courses and printed it - action Index, HomeController
+13.09.2019 15:47:05
+ user: b3260744@urhen.com taken courses and printed it - action Index, HomeController
+13.09.2019 15:47:08
+ == User: b3260744@urhen.com Go to personal area, action Index, ManageController
+13.09.2019 15:47:09
+ user: b3260744@urhen.com taken courses and printed it - action Index, HomeController
+13.09.2019 15:47:11
+ user: b3260744@urhen.com opened course to be aquqinted with it - action Read, HomeController
+13.09.2019 15:47:12
+ user: b3260744@urhen.com taken courses and printed it - action Index, HomeController
+13.09.2019 15:47:13
+ == User: b3260744@urhen.com Go to personal area, action Index, ManageController
+13.09.2019 15:47:14
+ user: b3260744@urhen.com taken courses and printed it - action Index, HomeController
+13.09.2019 16:04:47
+ user: b3260744@urhen.com taken courses and printed it - action Index, HomeController
+13.09.2019 16:05:11
+ user: b3260744@urhen.com taken courses and printed it - action Index, HomeController
+13.09.2019 16:05:17
+ == User: b3260744@urhen.com Go to personal area, action Index, ManageController
+13.09.2019 16:05:20
+ user: b3260744@urhen.com taken courses and printed it - action Index, HomeController
+13.09.2019 16:05:21
+ user: b3260744@urhen.com opened course to be aquqinted with it - action Read, HomeController
+13.09.2019 16:05:23
+ user: b3260744@urhen.com taken courses and printed it - action Index, HomeController
+13.09.2019 16:05:24
+ == User: b3260744@urhen.com Go to personal area, action Index, ManageController
+13.09.2019 16:05:28
+ user: b3260744@urhen.com taken courses and printed it - action Index, HomeController
+13.09.2019 16:05:30
+ user: b3260744@urhen.com opened course to be aquqinted with it - action Read, HomeController
+13.09.2019 16:05:31
+ user: b3260744@urhen.com taken courses and printed it - action Index, HomeController
+13.09.2019 16:05:33
+ == User: b3260744@urhen.com Go to personal area, action Index, ManageController
+13.09.2019 16:05:38
+ user: b3260744@urhen.com taken courses and printed it - action Index, HomeController
+13.09.2019 16:05:41
+ user: b3260744@urhen.com opened course to be aquqinted with it - action Read, HomeController
+13.09.2019 16:05:43
+ user: b3260744@urhen.com taken courses and printed it - action Index, HomeController
+13.09.2019 16:05:45
+ == User: b3260744@urhen.com Go to personal area, action Index, ManageController
+13.09.2019 16:05:50
+ user: b3260744@urhen.com taken courses and printed it - action Index, HomeController
+13.09.2019 17:54:30
+ user: b3260744@urhen.com taken courses and printed it - action Index, HomeController
+13.09.2019 18:02:57
+ == User: b3260744@urhen.com Go to personal area, action Index, ManageController
+13.09.2019 18:03:33
+ user:  taken courses and printed it - action Index, HomeController
+13.09.2019 18:04:45
+ user:  taken courses and printed it - action Index, HomeController
+13.09.2019 18:05:38
+ user: b3260744@urhen.com taken courses and printed it - action Index, HomeController
+13.09.2019 18:05:43
+ == User: b3260744@urhen.com Go to personal area, action Index, ManageController
+13.09.2019 18:07:30
+ user:  taken courses and printed it - action Index, HomeController
+13.09.2019 18:07:44
+ -- User: b3260744@urhen.com was logined - action login, AccountController
+13.09.2019 18:07:48
+ user: b3260744@urhen.com taken courses and printed it - action Index, HomeController
+13.09.2019 18:07:52
+ == User: b3260744@urhen.com Go to personal area, action Index, ManageController
+13.09.2019 18:08:14
+ == User: b3260744@urhen.com action Teacher, ManageController
+13.09.2019 18:09:41
+ user:  taken courses and printed it - action Index, HomeController
+13.09.2019 18:10:11
+ user:  taken courses and printed it - action Index, HomeController
+13.09.2019 18:10:26
+ -- User: b3260744@urhen.com was logined - action login, AccountController
+13.09.2019 18:10:32
+ user: b3260744@urhen.com taken courses and printed it - action Index, HomeController
+13.09.2019 18:10:33
+ == User: b3260744@urhen.com Go to personal area, action Index, ManageController
+13.09.2019 18:11:40
+ user:  taken courses and printed it - action Index, HomeController
+13.09.2019 18:12:08
+ user: b3260744@urhen.com taken courses and printed it - action Index, HomeController
+13.09.2019 18:12:10
+ == User: b3260744@urhen.com Go to personal area, action Index, ManageController
+13.09.2019 18:20:41
+ user: b3260744@urhen.com taken courses and printed it - action Index, HomeController
+13.09.2019 18:20:46
+ == User: b3260744@urhen.com Go to personal area, action Index, ManageController
+13.09.2019 18:20:51
+ user: b3260744@urhen.com taken courses and printed it - action Index, HomeController

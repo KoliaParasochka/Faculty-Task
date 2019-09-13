@@ -9,14 +9,17 @@ using Faculty.Storages;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
+using ProjectDatabase.Interfaces;
 using ProjectDatabase.Models;
+using ProjectDatabase.Repositories;
 
 namespace Faculty.Controllers
 {
     [Authorize]
     public class ManageController : Controller
     {
-        private Storage storage = new Storage();
+        //private Storage storage = new Storage();
+        private IUnitOfWork repository;
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
         FileManager fileManager = new FileManager();
@@ -31,6 +34,7 @@ namespace Faculty.Controllers
 
         public ManageController()
         {
+            repository = new EFUnitOfWork("DefaultConnection");
         }
 
         public ManageController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
@@ -90,12 +94,14 @@ namespace Faculty.Controllers
             {
                 return RedirectToAction("Index", "Admin");
             }
-            var person = storage.GetTeacher(storage.GetEmail(userId));
+            //var person = storage.GetTeacher(storage.GetEmail(userId));
+            var person = repository.Teachers.Find(t => t.Courses, t => t.Email == User.Identity.Name).FirstOrDefault();
             if (person != null)
             {
                 return RedirectToAction("Teacher");
             }
-            Student student = storage.GetStudent(storage.GetEmail(userId));
+            //Student student = storage.GetStudent(storage.GetEmail(userId));
+            var student = repository.Students.Find(s => s.Courses, s => s.Email == User.Identity.Name).FirstOrDefault();
             if(student != null)
             {
                 ViewBag.Student = student;
@@ -114,8 +120,12 @@ namespace Faculty.Controllers
             int courseId = Convert.ToInt32(CourseId);
             int studentId = Convert.ToInt32(StudentId);
             Mark mark = new Mark { Grade = Convert.ToInt32(Grade), CourseId = courseId, StudentId = studentId };
-            storage.DelMark(courseId, studentId);
-            storage.AddMark(mark);
+            MarkRepository rep = new MarkRepository();
+            Mark delMark = rep.Find(m => m.CourseId == courseId && m.StudentId == studentId).FirstOrDefault();
+            repository.Marks.Delete(delMark.Id);
+            repository.Marks.Create(mark);
+            //storage.DelMark(courseId, studentId);
+            //storage.AddMark(mark);
             WriteToInfo("== User: " + User.Identity.Name + " action SetMark, ManageController");
             return RedirectToAction("Teacher");
         }
@@ -134,7 +144,8 @@ namespace Faculty.Controllers
         public ActionResult Teacher()
         {
             var userId = User.Identity.GetUserId();
-            var teacher = storage.GetTeacher(storage.GetEmail(userId));
+            // var teacher = storage.GetTeacher(storage.GetEmail(userId));
+            var teacher = repository.Teachers.Find(t => t.Courses, t => t.Email == User.Identity.Name).First();
             ViewBag.Teacher = teacher;
             WriteToInfo("== User: " + User.Identity.Name + " action Teacher, ManageController");
             return View();
@@ -148,10 +159,11 @@ namespace Faculty.Controllers
         /// <returns></returns>
         public ActionResult GetStudentsFromCourse(Course model)
         {
-            List<Course> courses = storage.GetCoursesAndStudents();
+            //List<Course> courses = storage.GetCoursesAndStudents();
+            List<Course> courses = (List<Course>)repository.Courses.GetAll(c => c.Students);
             var TakeCourse = from el in courses
-                                where el.CourseId == model.CourseId
-                                select el;
+                             where el.CourseId == model.CourseId
+                             select el;
             Course course = TakeCourse.FirstOrDefault();
             ViewBag.Students = course.Students;
             WriteToInfo("== User: " + User.Identity.Name + " action GetStudentsFromCourse, ManageController");

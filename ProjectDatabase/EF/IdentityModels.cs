@@ -34,6 +34,11 @@ namespace ProjectDatabase.EF
         {
         }
 
+        public ApplicationDbContext(string connectionString) : base(connectionString)
+        {
+
+        }
+
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();

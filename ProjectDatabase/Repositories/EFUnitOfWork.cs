@@ -1,4 +1,5 @@
-﻿using ProjectDatabase.Interfaces;
+﻿using ProjectDatabase.EF;
+using ProjectDatabase.Interfaces;
 using ProjectDatabase.Models;
 using System;
 using System.Collections.Generic;
@@ -10,17 +11,78 @@ namespace ProjectDatabase.Repositories
 {
     public class EFUnitOfWork : IUnitOfWork
     {
-        public IRepository<Student> Students => throw new NotImplementedException();
+        ApplicationDbContext db;
+        private MarkRepository markRepository;
+        private StudentRepository studentRepository;
+        private TeacherRepository teacherRepository;
+        private CourseRepository courseRepository;
 
-        public IRepository<Course> Courses => throw new NotImplementedException();
+        public EFUnitOfWork(string connectionString)
+        {
+            db = new ApplicationDbContext(connectionString);
+        }
 
-        public IRepository<Teacher> Teachers => throw new NotImplementedException();
+        public IRepository<Student> Students
+        {
+            get
+            {
+                if (studentRepository == null)
+                    studentRepository = new StudentRepository(db);
+                return studentRepository;
+            }
+        }
 
-        public IRepository<Mark> Marks => throw new NotImplementedException();
+        public IRepository<Course> Courses
+        {
+            get
+            {
+                if (courseRepository == null)
+                    courseRepository = new CourseRepository(db);
+                return courseRepository;
+            }
+        }
+
+        public IRepository<Teacher> Teachers
+        {
+            get
+            {
+                if (teacherRepository == null)
+                    teacherRepository = new TeacherRepository(db);
+                return teacherRepository;
+            }
+        }
+
+        public IRepository<Mark> Marks
+        {
+            get
+            {
+                if (markRepository == null)
+                    markRepository = new MarkRepository(db);
+                return markRepository;
+            }
+        }
+
+        private bool disposed = false;
+
+        public virtual void Dispose(bool disposing)
+        {
+            if (!disposed)
+            {
+                if (disposing)
+                {
+                    using(ApplicationDbContext db = new ApplicationDbContext())
+                    {
+                        db.Dispose();
+                    }
+                }
+                disposed = true;
+            }
+        }
 
         public void Dispose()
         {
-            throw new NotImplementedException();
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
 
         public void Save()
