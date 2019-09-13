@@ -4475,3 +4475,10 @@ gets a size of teacher list (starts method storage.GetTeacherList().Count) - act
  user:  found the count of students on one course and save it - action Index, HomeController 
 12.09.2019 19:22:32
  user:  taken courses and printed it - action Index, HomeController
+13.09.2019 9:17:52
+ user:  get courses with teachers (start th method GetCoursesAndTeachers())
+ - method DelSpases, HomeController
+13.09.2019 9:17:52
+ user:  found the count of students on one course and save it - action Index, HomeController 
+13.09.2019 9:17:52
+ user:  taken courses and printed it - action Index, HomeController

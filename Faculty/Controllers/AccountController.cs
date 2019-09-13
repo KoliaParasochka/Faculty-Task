@@ -10,6 +10,7 @@ using Faculty.Storages;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
+using ProjectDatabase.EF;
 using ProjectDatabase.Models;
 
 namespace Faculty.Controllers

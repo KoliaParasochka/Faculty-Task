@@ -1,10 +1,11 @@
-﻿using System.Data.Entity;
+﻿using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using ProjectDatabase.Models;
+using System.Data.Entity;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
 
-namespace ProjectDatabase.Models
+namespace ProjectDatabase.EF
 {
     // В профиль пользователя можно добавить дополнительные данные, если указать больше свойств для класса ApplicationUser. Подробности см. на странице https://go.microsoft.com/fwlink/?LinkID=317594.
     public class ApplicationUser : IdentityUser
@@ -17,7 +18,7 @@ namespace ProjectDatabase.Models
             return userIdentity;
         }
 
-       
+
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>

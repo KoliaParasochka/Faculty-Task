@@ -108,7 +108,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EF\IdentityModels.cs" />
     <Compile Include="Interfaces\IRepository.cs" />
+    <Compile Include="Interfaces\IUnitOfWork.cs" />
     <Compile Include="Migrations\201906080717458_DataMigration.cs" />
     <Compile Include="Migrations\201906080717458_DataMigration.Designer.cs">
       <DependentUpon>201906080717458_DataMigration.cs</DependentUpon>
@@ -121,7 +123,6 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Course.cs" />
     <Compile Include="Models\CreateCourse.cs" />
-    <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Mark.cs" />
     <Compile Include="Models\RegisterAccount.cs" />
@@ -129,6 +130,10 @@
     <Compile Include="Models\Teacher.cs" />
     <Compile Include="Models\TeacherList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\CourseRepository.cs" />
+    <Compile Include="Repositories\MarkRepository.cs" />
+    <Compile Include="Repositories\StudentRepository.cs" />
+    <Compile Include="Repositories\TeacherRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -148,8 +153,6 @@
     <Content Include="Descriptions\Net.txt" />
     <Content Include="Descriptions\php.txt" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Repositories\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
