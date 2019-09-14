@@ -6,13 +6,21 @@ using Faculty.Storages;
 using System.Web.Mvc;
 using ProjectDatabase.Models;
 using Faculty.FileManage;
+using ProjectDatabase.Repositories;
 
 namespace Faculty.Controllers
 {
     [Authorize(Roles = "admin")]
     public class AdminController : Controller
     {
-        Storage storage = new Storage();
+        //Storage storage = new Storage();
+        EFUnitOfWork repository;
+
+        public AdminController()
+        {
+            repository = new EFUnitOfWork("DefaultConnection");
+        }
+
         FileManager fileManager = new FileManager();
 
         private void WriteToInfo(string message)
@@ -31,10 +39,14 @@ namespace Faculty.Controllers
         /// <returns></returns>
         public ActionResult Index()
         {
-            ViewBag.Courses = storage.GetCoursesAndTeachers();
-            ViewBag.Students = storage.GetStudents();
-            ViewBag.Teachers = storage.GetTeacherList();
-            ViewBag.Count = storage.GetTeacherList().Count;
+            //ViewBag.Courses = storage.GetCoursesAndTeachers();
+            //ViewBag.Students = storage.GetStudents();
+            //ViewBag.Teachers = storage.GetTeacherList();
+            //ViewBag.Count = storage.GetTeacherList().Count;
+            ViewBag.Courses = repository.Courses.GetAll();
+            ViewBag.Students = repository.Students.GetAll();
+            ViewBag.Teachers = repository.TeacherLists.GetAll();
+            ViewBag.Count = repository.TeacherLists.GetAll().ToList().Count;
             WriteToInfo("** admin: gets courses and teachers (starts method storage.GetCoursesAndTeachers())\n" +
                 "gets students (starts method storage.GetStudents())\n" + "gets the list of new teachers (storage.GetTeacherList())\n" 
                 + "gets a size of teacher list (starts method storage.GetTeacherList().Count) - action Index,  AdminController");
@@ -49,8 +61,12 @@ namespace Faculty.Controllers
         [HttpPost]
         public ActionResult AddTeacher(string Id)
         {
-            storage.AddTeacher(Convert.ToInt32(Id));
-            storage.DelTeacher(Convert.ToInt32(Id));
+            //storage.AddTeacher(Convert.ToInt32(Id));
+            //storage.DelTeacher(Convert.ToInt32(Id));
+            TeacherList teacherList = repository.TeacherLists.Get(Convert.ToInt32(Id));
+            Teacher teacher = new Teacher { Name = teacherList.Name, Email = teacherList.Email, Surname = teacherList.Surname };
+            repository.Teachers.Create(teacher);
+            repository.TeacherLists.Delete(teacherList.Id);
             WriteToInfo("** admin: adds teacher to teachers in database (starts method storage.AddTeacher(Convert.ToInt32(Id)))\n" +
                 "deletes an teacher from teacher list in database (starts method storage.DelTeacher(Convert.ToInt32(Id)))\n - action AddTeacher, AdminController");
             return RedirectToAction("Index");
@@ -64,7 +80,8 @@ namespace Faculty.Controllers
         [HttpPost]
         public ActionResult DelTeacher(string Id)
         {
-            storage.DelTeacher(Convert.ToInt32(Id));
+            //storage.DelTeacher(Convert.ToInt32(Id));
+            repository.TeacherLists.Delete(Convert.ToInt32(Id));
             WriteToInfo("** admin: deletes an teacher from teacher list in database (starts method storage.DelTeacher(Convert.ToInt32(Id)))\n - action DelTeacher,  AdminController");
             return RedirectToAction("Index");
         }
@@ -76,7 +93,8 @@ namespace Faculty.Controllers
         /// <returns></returns>
         public ActionResult AddCourse()
         {
-            ViewBag.Teachers = storage.GetTeachers();
+            //ViewBag.Teachers = storage.GetTeachers();
+            ViewBag.Teachers = repository.Teachers.GetAll();
             WriteToInfo("** admin: gets teachers to show it on view (starts method storage.GetTeachers()) - action AddCourse,  AdminController");
             return View();
         }
@@ -89,18 +107,15 @@ namespace Faculty.Controllers
         /// <param name="Id"></param>
         /// <returns></returns>
         //[HttpPost]
-        public ActionResult ChangeCourse(int? id)
+        public ActionResult ChangeCourse(int id)
         {
-            List<Course> courses = storage.GetCoursesAndTeachers();
-            var courseList = from el in courses
-                             where el.CourseId == id
-                             select el;
-            Course course = courseList.FirstOrDefault();
+            ViewBag.IsValid = true;
+            Course course = repository.Courses.GetAll().Where(c => c.CourseId == id).FirstOrDefault();
             if(course != null)
             {
-                ViewBag.Teachers = storage.GetTeachers();
+                ViewBag.Teachers = repository.Teachers.GetAll();
                 ViewBag.Course = course;
-                CreateCourse mycourse = new CreateCourse { Name = course.Name, FinishDate = course.FinishDate, StartDate = course.StartDate, Text = course.Text, TeacherEmail = course.Teacher.Email };
+                CreateCourse mycourse = new CreateCourse { id = id, Name = course.Name, FinishDate = course.FinishDate, StartDate = course.StartDate, Text = course.Text, TeacherEmail = course.Teacher.Email };
                 WriteToInfo("** admin: action ChangeCourse, AdminController");
                 return View(mycourse);
             }
@@ -118,19 +133,23 @@ namespace Faculty.Controllers
         [HttpPost]
         public ActionResult ChangeCourse(CreateCourse changeCourse)
         {
-            ViewBag.IsValid = true;
-            if (ModelState.IsValid && changeCourse.FinishDate > changeCourse.StartDate && changeCourse.StartDate > DateTime.Now && changeCourse.FinishDate > DateTime.Now)
+            if (ModelState.IsValid)
             {
-                storage.ChangeCourse(changeCourse);
+                Teacher teacher = repository.Teachers.Find(t => t.Courses, t => t.Email == changeCourse.TeacherEmail).FirstOrDefault();
+                Course course = repository.Courses.GetAll().Where(c => c.CourseId == changeCourse.id).FirstOrDefault();
+                course.Name = changeCourse.Name;
+                course.StartDate = changeCourse.StartDate;
+                course.FinishDate = changeCourse.FinishDate;
+                course.Text = changeCourse.Text;
+                course.TeacherId = teacher.TeacherId;
+                repository.Courses.Update(course);
                 WriteToInfo("** admin: action ChangeCourseInList, AdminController");
                 return RedirectToAction("Index");
             }
             else
             {
-                ViewBag.Teachers = storage.GetTeachers();
+                ViewBag.Teachers = repository.Teachers.GetAll();
                 WriteToInfo("** admin: action ChangeCourseInList, AdminController");
-                ViewBag.Message = "Дата начала обучения должна быть строго больше даты завершения";
-                ViewBag.IsValid = false;
                 return View(changeCourse);
             }
             
@@ -142,9 +161,11 @@ namespace Faculty.Controllers
         /// <param name="Id"></param>
         /// <returns></returns>
         [HttpPost]
-        public ActionResult BlockStudent(string Name)
+        public ActionResult BlockStudent(int id)
         {
-            storage.BlockUnblockStudent(Name, true);
+            Student student = repository.Students.Get(id);
+            student.IsBlocked = true;
+            repository.Students.Update(student);
             WriteToInfo("** admin: action BlockStudent, AdminController");
             return RedirectToAction("Index");
         }
@@ -155,9 +176,11 @@ namespace Faculty.Controllers
         /// <param name="Id"></param>
         /// <returns></returns>
         [HttpPost]
-        public ActionResult UnblockStudent(string Name)
+        public ActionResult UnblockStudent(int id)
         {
-            storage.BlockUnblockStudent(Name, false);
+            Student student = repository.Students.Get(id);
+            student.IsBlocked = false;
+            repository.Students.Update(student);
             WriteToInfo("** admin: action UnblockStudent, AdminController");
             return RedirectToAction("Index");
         }
@@ -168,9 +191,12 @@ namespace Faculty.Controllers
         /// <param name="Id"></param>
         /// <returns></returns>
         [HttpPost]
-        public ActionResult DeleteCourse(string Name)
+        public ActionResult DeleteCourse(int id)
         {
-            storage.RemoveRestoreCourse(Name, true);
+            Course course = repository.Courses.Get(id);
+            course.IsRemoved = true;
+            repository.Courses.Update(course);
+            
             WriteToInfo("** admin: action DeleteCourse, AdminController");
             return RedirectToAction("Index");
         }
@@ -181,9 +207,11 @@ namespace Faculty.Controllers
         /// <param name="Id"></param>
         /// <returns></returns>
         [HttpPost]
-        public ActionResult RestoreCourse(string Name)
+        public ActionResult RestoreCourse(int id)
         {
-            storage.RemoveRestoreCourse(Name, false);
+            Course course = repository.Courses.Get(id);
+            course.IsRemoved = false;
+            repository.Courses.Update(course);
             WriteToInfo("** admin: action RestoreCourse, AdminController");
             return RedirectToAction("Index");
         }
@@ -200,7 +228,8 @@ namespace Faculty.Controllers
         {
             if (ModelState.IsValid)
             {
-                Teacher teacher = storage.GetTeacher(createCourse.TeacherEmail);
+                
+                Teacher teacher = repository.Teachers.Find(t => t.Courses, t => t.Email == createCourse.TeacherEmail).FirstOrDefault();
                 Course course = new Course
                 {
                     Name = createCourse.Name,
@@ -209,7 +238,7 @@ namespace Faculty.Controllers
                     Text = createCourse.Text,
                     TeacherId = teacher.TeacherId
                 };
-                storage.AddCourse(course);
+                repository.Courses.Create(course);
             }
             WriteToInfo("** admin: action AddCourseToList, AdminController");
             return RedirectToAction("Index");

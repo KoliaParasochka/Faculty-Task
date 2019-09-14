@@ -12,6 +12,7 @@ namespace ProjectDatabase.Interfaces
         IRepository<Student> Students { get; }
         IRepository<Course> Courses { get; }
         IRepository<Teacher> Teachers { get; }
+        IRepository<TeacherList> TeacherLists { get; }
         IRepository<Mark> Marks { get; }
         void Save();
     }

@@ -63,7 +63,7 @@
                 {
                     using (Html.BeginForm("DeleteCourse", "Admin", FormMethod.Post, new { @class = "form-method" }))
                     {
-                        <input type="hidden" name="Name" value="@el.Name" />
+                        <input type="hidden" name="id" value="@el.CourseId" />
                         <input type="submit" value="Удалить" class="btn-change" />
                     }
                 }
@@ -71,7 +71,7 @@
                 {
                     using (Html.BeginForm("RestoreCourse", "Admin", FormMethod.Post, new { @class = "form-method" }))
                     {
-                        <input type="hidden" name="Name" value="@el.Name" />
+                        <input type="hidden" name="id" value="@el.CourseId" />
                         <input type="submit" value="Восстановить" class="btn-change" />
                     }
                 }
@@ -99,7 +99,7 @@
                 {
                     using (Html.BeginForm("BlockStudent", "Admin", FormMethod.Post, new { @class = "form-method" }))
                     {
-                        <input type="hidden" name="Name" value="@el.Name" />
+                        <input type="hidden" name="id" value="@el.Id" />
                         <input type="submit" value="Заблокировать" class="btn-change" />
                     }
                 }
@@ -107,7 +107,7 @@
                 {
                     using (Html.BeginForm("UnblockStudent", "Admin", FormMethod.Post, new { @class = "form-method" }))
                     {
-                        <input type="hidden" name="Name" value="@el.Name" />
+                        <input type="hidden" name="id" value="@el.Id"/>
                         <input type="submit" value="Разблокировать" class="btn-change" />
                     }
                 }

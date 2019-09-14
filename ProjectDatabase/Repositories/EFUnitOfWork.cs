@@ -15,6 +15,7 @@ namespace ProjectDatabase.Repositories
         private MarkRepository markRepository;
         private StudentRepository studentRepository;
         private TeacherRepository teacherRepository;
+        private TeacherListRepository teacherListRepository;
         private CourseRepository courseRepository;
 
         public EFUnitOfWork(string connectionString)
@@ -59,6 +60,16 @@ namespace ProjectDatabase.Repositories
                 if (markRepository == null)
                     markRepository = new MarkRepository(db);
                 return markRepository;
+            }
+        }
+
+        public IRepository<TeacherList> TeacherLists
+        {
+            get
+            {
+                if (teacherListRepository == null)
+                    teacherListRepository = new TeacherListRepository(db);
+                return teacherListRepository;
             }
         }
 

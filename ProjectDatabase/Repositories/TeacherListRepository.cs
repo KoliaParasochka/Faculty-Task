@@ -13,9 +13,9 @@ namespace ProjectDatabase.Repositories
     {
         ApplicationDbContext db;
 
-        public TeacherListRepository(string connectionString)
+        public TeacherListRepository(ApplicationDbContext context)
         {
-            db = new ApplicationDbContext(connectionString);
+            db = context;
         }
 
         public void Create(TeacherList item)

@@ -97,7 +97,7 @@ namespace Faculty.Controllers
                 return View(model);
             }
             //Student student = storage.GetStudent(model.Email);
-            Student student = repository.Students.Find(s => s.Courses, s => s.Email == model.Email).First();
+            Student student = repository.Students.Find(s => s.Courses, s => s.Email == model.Email).FirstOrDefault();
             if(student != null && student.IsBlocked)
             {
                 ViewBag.Message = "Вы заблокированы :(";

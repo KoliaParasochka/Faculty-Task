@@ -11,6 +11,8 @@ namespace ProjectDatabase.Models
     {
         public int CourseId { get; set; }
 
+        public int id { get; set; }
+
         [Required]
         [Display(Name = "Почта преподавателя")]
         public string TeacherEmail { get; set; }
@@ -22,7 +24,7 @@ namespace ProjectDatabase.Models
 
         [Required]
         [Display(Name = "Описание курса")]
-        [StringLength(1000, ErrorMessage = "Значение {0} должно содержать не менее {2} символов.")]  
+        [StringLength(10000, ErrorMessage = "Значение {0} должно содержать не менее {2} символов.")]  
         public string Text { get; set; }
 
         [Required]
