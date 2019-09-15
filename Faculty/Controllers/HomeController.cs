@@ -1,6 +1,7 @@
 ﻿using Faculty.FileManage;
 using Faculty.Storages;
 using Microsoft.AspNet.Identity;
+using Newtonsoft.Json;
 using ProjectDatabase.Entities;
 using ProjectDatabase.Interfaces;
 using ProjectDatabase.Models;
@@ -56,9 +57,9 @@ namespace Faculty.Controllers
         /// <returns></returns>
         private List<Course> FindCountStudents(List<Course> courses)
         {
-            Storage storage = new Storage();
-            List<Course> c = (List<Course>) database.Courses.GetAll(s => s.Students); /*storage.GetCoursesAndStudents();*/
-            for(int i = 0;i < courses.Count; i++)
+            Storage<Course> storage = new Storage<Course>();
+            List<Course> c = (List<Course>)database.Courses.GetAll(s => s.Students); /*storage.GetCoursesAndStudents();*/
+            for (int i = 0; i < courses.Count; i++)
             {
                 courses[i].CountStudents = storage.GetCountOfStudentsOnCourse(c[i]);
             }
@@ -291,7 +292,7 @@ namespace Faculty.Controllers
             if (User.Identity.IsAuthenticated)
             {
                 var person = database.Students.Find(s => s.Courses, s => s.Email == User.Identity.Name);
-                if (person != null)
+                if (person != null && !User.IsInRole("admin"))
                 {
                     ViewBag.CanRegister = true;
                 }
@@ -321,7 +322,7 @@ namespace Faculty.Controllers
         public ActionResult Registration(int id)
         {
             Course course = database.Courses.Get(id);
-            Student student = database.Students.Find(s => s.Courses, s => s.Email == User.Identity.Name).First();
+            Student student = database.Students.Find(s => s.Courses, s => s.Email == User.Identity.Name).FirstOrDefault();
             student.Courses.Add(course);
             database.Students.Update(student);
             //WriteToInfo("user: " + User.Identity.Name + " was regirstrated on course '" + Name + "' - action Registration, HomeController");

@@ -68,36 +68,27 @@
         </div>
     </div>
     
-    <h3 class="head-pos bg-col-index">Зарегистрируйтесь на наши курсы</h3>
-    <article class="courses bg-col-index">
-        @foreach (var el in ViewBag.Courses)
-        {
-
-            if (!el.IsRemoved)
+        <h3 class="head-pos bg-col-index">Зарегистрируйтесь на наши курсы</h3>
+        <article class="courses bg-col-index">
+            @foreach (var el in ViewBag.Courses)
             {
-                <section>
-                    @Spaces(el.Name)
-                    @GetFirstText(el.Text)
-                    @using (Html.BeginForm("Read", "Home", FormMethod.Post))
-                    {
-                    @*<input type="hidden" value=@el.CountStudents name="countStud" />
-                    <input type="hidden" value=@el.Teacher.Name name="TeacherName" />
-                    <input type="hidden" value=@el.Teacher.Surname name="TeacherSurname" />
-                    <input type="hidden" value=@el.StartDate name="StartDate" />
-                    <input type="hidden" value=@el.FinishDate name="FinishDate" />
-                    <input type="hidden" value=@el.Name name="Name" />*@
-                        <input type="hidden" value="@el.CourseId" name="id"/>
-                        <input type="submit" value="Подробнее" class="btn btn-primary right" />
-                    @*<button name="Text" value="@el.Text" class="btn btn-primary right">Подробнее</button>*@
-                    }
-                    
-                </section>
+
+                if (!el.IsRemoved)
+                {
+                    <section>
+                        @Spaces(el.Name)
+                        @GetFirstText(el.Text)
+                        
+                        @using (Html.BeginForm("Read", "Home", FormMethod.Post))
+                        {
+                            <input type="hidden" value="@el.CourseId" name="id"/>
+                            <input type="submit" value="Подробнее" class="btn btn-primary right" />
+                        }
+
+                    </section>
+                }
             }
-        }
-     </article>
-
-
-
+        </article>  
 @helper GetFirstText(string Text)
 {
     string txt = string.Empty;

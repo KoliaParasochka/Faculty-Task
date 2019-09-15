@@ -16,15 +16,20 @@
         <section>
             @Spaces(Model[i].Name)
             @GetFirstText(Model[i].Text)
-            @using (Html.BeginForm("Read", "Home", FormMethod.Post))
+            @*@using (Html.BeginForm("Read", "Home", FormMethod.Post))
             {
                 <input type="hidden" value=@Model[i].CountStudents name="countStud" />
-                <input type="hidden" value=@Model[i].Teacher.Name name="TeacherName" />@*Можна преобразовать у модель!*@
+                <input type="hidden" value=@Model[i].Teacher.Name name="TeacherName" />
                 <input type="hidden" value=@Model[i].Teacher.Surname name="TeacherSurname" />
                 <input type="hidden" value=@Model[i].StartDate name="StartDate" />
                 <input type="hidden" value=@Model[i].FinishDate name="FinishDate" />
                 <input type="hidden" value=@Model[i].Name name="Name" />
                 <button name="Text" value="@Model[i].Text" class="btn btn-primary right">Подробнее</button>
+            }*@
+            @using (Html.BeginForm("Read", "Home", FormMethod.Post))
+            {
+                 <input type="hidden" value="@Model[i].CourseId" name="id"/>
+                 <input type="submit" value="Подробнее" class="btn btn-primary right" />
             }
         </section>
         }
