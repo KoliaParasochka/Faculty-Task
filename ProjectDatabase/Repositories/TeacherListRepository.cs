@@ -1,4 +1,5 @@
 ﻿using ProjectDatabase.EF;
+using ProjectDatabase.Entities;
 using ProjectDatabase.Interfaces;
 using ProjectDatabase.Models;
 using System;

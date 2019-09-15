@@ -1,4 +1,5 @@
-﻿using ProjectDatabase.Models;
+﻿using ProjectDatabase.Entities;
+using ProjectDatabase.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;

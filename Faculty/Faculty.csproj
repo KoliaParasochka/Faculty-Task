@@ -202,7 +202,6 @@
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Controllers\TestController.cs" />
     <Compile Include="FileManage\FileManager.cs" />
     <Compile Include="FileManage\IFileManager.cs" />
     <Compile Include="Global.asax.cs">

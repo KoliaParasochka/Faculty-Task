@@ -1,6 +1,7 @@
 ﻿using Faculty.FileManage;
 using Faculty.Storages;
 using Microsoft.AspNet.Identity;
+using ProjectDatabase.Entities;
 using ProjectDatabase.Interfaces;
 using ProjectDatabase.Models;
 using ProjectDatabase.Repositories;
@@ -15,18 +16,11 @@ namespace Faculty.Controllers
     public class HomeController : Controller
     {
         IUnitOfWork database;
-        Storage storage;
         FileManager fileManager = new FileManager();
 
         public HomeController()
         {
-            storage = new Storage();
             database = new EFUnitOfWork("DefaultConnection");
-        }
-
-        public HomeController(Storage stor)
-        {
-            storage = stor;
         }
 
         private void WriteToInfo(string message)
@@ -62,6 +56,7 @@ namespace Faculty.Controllers
         /// <returns></returns>
         private List<Course> FindCountStudents(List<Course> courses)
         {
+            Storage storage = new Storage();
             List<Course> c = (List<Course>) database.Courses.GetAll(s => s.Students); /*storage.GetCoursesAndStudents();*/
             for(int i = 0;i < courses.Count; i++)
             {
@@ -98,7 +93,7 @@ namespace Faculty.Controllers
                 var sort = from t in courses
                            orderby t.CountStudents
                            select t;
-               
+
                 return sort;
             }
             if (How == "По имени")
@@ -212,7 +207,7 @@ namespace Faculty.Controllers
         public ActionResult ShowCourses()
         {
             ViewBag.Message = "Some message";
-            //WriteToInfo("user: " + User.Identity.Name + " get courses - action ShowCourses, HomeController");
+            WriteToInfo("user: " + User.Identity.Name + " get courses - action ShowCourses, HomeController");
             return View("ShowCourses", DelSpases());
         }
 
@@ -225,7 +220,7 @@ namespace Faculty.Controllers
         {
             WriteToInfo("user: " + User.Identity.Name + " get courses with name:" + Name + " - action ShowCourses, HomeController");
             List<Course> courses = DelSpases();
-            
+
             if (string.IsNullOrEmpty(Name))
             {
                 return View(courses);

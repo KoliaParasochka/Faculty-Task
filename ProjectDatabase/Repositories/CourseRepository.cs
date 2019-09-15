@@ -1,6 +1,6 @@
 ﻿using ProjectDatabase.EF;
 using ProjectDatabase.Interfaces;
-using ProjectDatabase.Models;
+using ProjectDatabase.Entities;
 using System;
 using System.Data.Entity;
 using System.Collections.Generic;

@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
-namespace ProjectDatabase.Models
+
+namespace ProjectDatabase.Entities
 {
     public class Teacher
     {
@@ -15,7 +12,7 @@ namespace ProjectDatabase.Models
         public virtual ICollection<Course> Courses { get; set; }
         public Teacher()
         {
-            
+
             Courses = new List<Course>();
         }
     }

@@ -9,6 +9,7 @@ using Faculty.Storages;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
+using ProjectDatabase.Entities;
 using ProjectDatabase.Interfaces;
 using ProjectDatabase.Models;
 using ProjectDatabase.Repositories;

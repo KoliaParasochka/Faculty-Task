@@ -6,6 +6,7 @@ using ProjectDatabase.EF;
 using ProjectDatabase.Interfaces;
 using ProjectDatabase.Models;
 using System.Linq.Expressions;
+using ProjectDatabase.Entities;
 
 namespace ProjectDatabase.Repositories
 {

@@ -7,13 +7,13 @@ using System.Web.Mvc;
 using ProjectDatabase.Models;
 using Faculty.FileManage;
 using ProjectDatabase.Repositories;
+using ProjectDatabase.Entities;
 
 namespace Faculty.Controllers
 {
     [Authorize(Roles = "admin")]
     public class AdminController : Controller
     {
-        //Storage storage = new Storage();
         EFUnitOfWork repository;
 
         public AdminController()
@@ -39,10 +39,6 @@ namespace Faculty.Controllers
         /// <returns></returns>
         public ActionResult Index()
         {
-            //ViewBag.Courses = storage.GetCoursesAndTeachers();
-            //ViewBag.Students = storage.GetStudents();
-            //ViewBag.Teachers = storage.GetTeacherList();
-            //ViewBag.Count = storage.GetTeacherList().Count;
             ViewBag.Courses = repository.Courses.GetAll();
             ViewBag.Students = repository.Students.GetAll();
             ViewBag.Teachers = repository.TeacherLists.GetAll();
@@ -61,8 +57,6 @@ namespace Faculty.Controllers
         [HttpPost]
         public ActionResult AddTeacher(string Id)
         {
-            //storage.AddTeacher(Convert.ToInt32(Id));
-            //storage.DelTeacher(Convert.ToInt32(Id));
             TeacherList teacherList = repository.TeacherLists.Get(Convert.ToInt32(Id));
             Teacher teacher = new Teacher { Name = teacherList.Name, Email = teacherList.Email, Surname = teacherList.Surname };
             repository.Teachers.Create(teacher);
@@ -80,7 +74,6 @@ namespace Faculty.Controllers
         [HttpPost]
         public ActionResult DelTeacher(string Id)
         {
-            //storage.DelTeacher(Convert.ToInt32(Id));
             repository.TeacherLists.Delete(Convert.ToInt32(Id));
             WriteToInfo("** admin: deletes an teacher from teacher list in database (starts method storage.DelTeacher(Convert.ToInt32(Id)))\n - action DelTeacher,  AdminController");
             return RedirectToAction("Index");
@@ -93,7 +86,6 @@ namespace Faculty.Controllers
         /// <returns></returns>
         public ActionResult AddCourse()
         {
-            //ViewBag.Teachers = storage.GetTeachers();
             ViewBag.Teachers = repository.Teachers.GetAll();
             WriteToInfo("** admin: gets teachers to show it on view (starts method storage.GetTeachers()) - action AddCourse,  AdminController");
             return View();
@@ -106,10 +98,8 @@ namespace Faculty.Controllers
         /// </summary>
         /// <param name="Id"></param>
         /// <returns></returns>
-        //[HttpPost]
         public ActionResult ChangeCourse(int id)
         {
-            ViewBag.IsValid = true;
             Course course = repository.Courses.GetAll().Where(c => c.CourseId == id).FirstOrDefault();
             if(course != null)
             {
@@ -228,7 +218,6 @@ namespace Faculty.Controllers
         {
             if (ModelState.IsValid)
             {
-                
                 Teacher teacher = repository.Teachers.Find(t => t.Courses, t => t.Email == createCourse.TeacherEmail).FirstOrDefault();
                 Course course = new Course
                 {

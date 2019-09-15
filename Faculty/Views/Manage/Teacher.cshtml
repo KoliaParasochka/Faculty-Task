@@ -1,6 +1,6 @@
 ﻿@using Faculty.Storages
-@using ProjectDatabase.Models
-
+@using ProjectDatabase.Entities
+@using ProjectDatabase.Repositories
 @model ProjectDatabase.Models.IndexViewModel
 @{
     ViewBag.Title = "Teacher";
@@ -31,12 +31,15 @@
 </div>
 @helper PrintStudents(Course course, int courseId)
 {
-    Storage storage = new Storage();
-    List<Course> courses = storage.GetCoursesAndStudents();
-    var TakeCourse = from el in courses
-                     where el.CourseId == course.CourseId
-                     select el;
-    Course mycourse = TakeCourse.FirstOrDefault();
+//Storage storage = new Storage();
+//List<Course> courses = storage.GetCoursesAndStudents();
+//var TakeCourse = from el in courses
+//                 where el.CourseId == course.CourseId
+//                 select el;
+//Course mycourse = TakeCourse.FirstOrDefault();
+EFUnitOfWork repository = new EFUnitOfWork("DefaultConnection");
+List<Course> courses = (List<Course>)repository.Courses.GetAll(c => c.Students);
+var mycourse = courses.Where(c => c.CourseId == course.CourseId).FirstOrDefault();
     <b>
         <span class="name">Имя</span>
         <span>Фамилия</span>
@@ -61,8 +64,11 @@
 
 @helper GetGrade(int courseId, int studentId)
 {
-    Storage storage = new Storage();
-    Mark mark = storage.GetMark(courseId, studentId);
+    //Storage storage = new Storage();
+    EFUnitOfWork repository = new EFUnitOfWork("DefaultConnection");
+    //Mark mark = storage.GetMark(courseId, studentId);
+    List<Mark> marks = (List<Mark>)repository.Marks.GetAll();
+    Mark mark = marks.Where(m => m.StudentId == studentId && m.CourseId == courseId).FirstOrDefault();
     if (mark != null)
     {
         @mark.Grade
@@ -71,5 +77,6 @@
     {
         
     }
+
 
 }

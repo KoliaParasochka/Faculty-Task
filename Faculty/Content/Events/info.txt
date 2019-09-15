@@ -5388,3 +5388,158 @@ gets a size of teacher list (starts method storage.GetTeacherList().Count) - act
  user: somemail@mail.ru taken courses and printed it - action Index, HomeController
 14.09.2019 12:14:17
  == User: somemail@mail.ru Go to personal area, action Index, ManageController
+14.09.2019 12:23:01
+ user: somemail@mail.ru taken courses and printed it - action Index, HomeController
+14.09.2019 12:23:07
+ == User: somemail@mail.ru Go to personal area, action Index, ManageController
+14.09.2019 12:23:16
+ user:  taken courses and printed it - action Index, HomeController
+14.09.2019 12:23:29
+ user: kolian@mail.ru taken courses and printed it - action Index, HomeController
+14.09.2019 12:23:31
+ == User: kolian@mail.ru Go to personal area, action Index, ManageController
+14.09.2019 12:23:31
+ ** admin: gets courses and teachers (starts method storage.GetCoursesAndTeachers())
+gets students (starts method storage.GetStudents())
+gets the list of new teachers (storage.GetTeacherList())
+gets a size of teacher list (starts method storage.GetTeacherList().Count) - action Index,  AdminController
+14.09.2019 12:23:35
+ ** admin: action ChangeCourse, AdminController
+14.09.2019 12:23:44
+ ** admin: action ChangeCourseInList, AdminController
+14.09.2019 13:09:00
+ user: kolian@mail.ru taken courses and printed it - action Index, HomeController
+14.09.2019 13:09:06
+ == User: kolian@mail.ru Go to personal area, action Index, ManageController
+14.09.2019 13:09:06
+ ** admin: gets courses and teachers (starts method storage.GetCoursesAndTeachers())
+gets students (starts method storage.GetStudents())
+gets the list of new teachers (storage.GetTeacherList())
+gets a size of teacher list (starts method storage.GetTeacherList().Count) - action Index,  AdminController
+14.09.2019 13:09:12
+ ** admin: action ChangeCourse, AdminController
+14.09.2019 13:09:20
+ user:  taken courses and printed it - action Index, HomeController
+14.09.2019 13:09:28
+ user: c1554467@urhen.com taken courses and printed it - action Index, HomeController
+14.09.2019 13:09:30
+ == User: c1554467@urhen.com Go to personal area, action Index, ManageController
+14.09.2019 13:09:30
+ == User: c1554467@urhen.com action Teacher, ManageController
+14.09.2019 13:10:58
+ == User: c1554467@urhen.com action Teacher, ManageController
+14.09.2019 13:11:03
+ user:  taken courses and printed it - action Index, HomeController
+14.09.2019 13:11:13
+ -- User: somemail@mail.ru was logined - action login, AccountController
+14.09.2019 13:11:20
+ user: somemail@mail.ru taken courses and printed it - action Index, HomeController
+14.09.2019 13:11:21
+ == User: somemail@mail.ru Go to personal area, action Index, ManageController
+14.09.2019 13:13:04
+ == User: somemail@mail.ru Go to personal area, action Index, ManageController
+14.09.2019 13:13:16
+ == User: somemail@mail.ru Go to personal area, action Index, ManageController
+14.09.2019 13:13:21
+ user: somemail@mail.ru taken courses and printed it - action Index, HomeController
+14.09.2019 19:28:48
+ user: somemail@mail.ru taken courses and printed it - action Index, HomeController
+14.09.2019 19:29:06
+ user: somemail@mail.ru get courses with name:Колобок - action ShowCourses, HomeController
+14.09.2019 19:29:06
+ user: somemail@mail.ru get courses with teachers (start th method GetCoursesAndTeachers())
+ - method DelSpases, HomeController
+14.09.2019 19:29:13
+ user: somemail@mail.ru get courses with name:.Net - action ShowCourses, HomeController
+14.09.2019 19:29:13
+ user: somemail@mail.ru get courses with teachers (start th method GetCoursesAndTeachers())
+ - method DelSpases, HomeController
+14.09.2019 19:29:13
+ user: somemail@mail.ru found the count of students on one course and save it - action Index, HomeController 
+14.09.2019 19:29:23
+ user: somemail@mail.rudescenting sorting, action Index, HomeController
+14.09.2019 19:29:23
+ user: somemail@mail.ru get courses with teachers (start th method GetCoursesAndTeachers())
+ - method DelSpases, HomeController
+14.09.2019 19:29:23
+ user: somemail@mail.ru found the count of students on one course and save it - action Index, HomeController 
+14.09.2019 19:29:28
+ user: somemail@mail.ru ascenting sorting - action Index, HomeController
+14.09.2019 19:29:28
+ user: somemail@mail.ru get courses with teachers (start th method GetCoursesAndTeachers())
+ - method DelSpases, HomeController
+14.09.2019 19:29:28
+ user: somemail@mail.ru found the count of students on one course and save it - action Index, HomeController 
+14.09.2019 19:29:34
+ user: somemail@mail.ru get courses with name:Программирование - action ShowCourses, HomeController
+14.09.2019 19:29:34
+ user: somemail@mail.ru get courses with teachers (start th method GetCoursesAndTeachers())
+ - method DelSpases, HomeController
+14.09.2019 19:29:34
+ user: somemail@mail.ru found the count of students on one course and save it - action Index, HomeController 
+14.09.2019 20:04:07
+ == User: somemail@mail.ru Go to personal area, action Index, ManageController
+14.09.2019 20:40:58
+ user: somemail@mail.ru taken courses and printed it - action Index, HomeController
+15.09.2019 10:34:15
+ user: somemail@mail.ru taken courses and printed it - action Index, HomeController
+15.09.2019 10:34:29
+ user: somemail@mail.ru get courses with name:Программирование - action ShowCourses, HomeController
+15.09.2019 10:34:29
+ user: somemail@mail.ru get courses with teachers (start th method GetCoursesAndTeachers())
+ - method DelSpases, HomeController
+15.09.2019 10:34:29
+ user: somemail@mail.ru found the count of students on one course and save it - action Index, HomeController 
+15.09.2019 10:35:01
+ user:  taken courses and printed it - action Index, HomeController
+15.09.2019 10:35:18
+ user:  get courses with name:Программирование - action ShowCourses, HomeController
+15.09.2019 10:35:19
+ user:  get courses with teachers (start th method GetCoursesAndTeachers())
+ - method DelSpases, HomeController
+15.09.2019 10:36:03
+ user:  found the count of students on one course and save it - action Index, HomeController 
+15.09.2019 10:37:01
+ user: somemail@mail.ru taken courses and printed it - action Index, HomeController
+15.09.2019 10:37:06
+ user: somemail@mail.ru get courses with name:Программирование - action ShowCourses, HomeController
+15.09.2019 10:37:06
+ user: somemail@mail.ru get courses with teachers (start th method GetCoursesAndTeachers())
+ - method DelSpases, HomeController
+15.09.2019 10:37:06
+ user: somemail@mail.ru found the count of students on one course and save it - action Index, HomeController 
+15.09.2019 10:38:59
+ user: somemail@mail.ru taken courses and printed it - action Index, HomeController
+15.09.2019 10:39:03
+ user:  taken courses and printed it - action Index, HomeController
+15.09.2019 10:39:42
+ user:  taken courses and printed it - action Index, HomeController
+15.09.2019 10:40:27
+ user: c1639767@urhen.com taken courses and printed it - action Index, HomeController
+15.09.2019 10:40:29
+ == User: c1639767@urhen.com Go to personal area, action Index, ManageController
+15.09.2019 10:40:29
+ == User: c1639767@urhen.com action NoAccess, ManageController
+15.09.2019 10:40:32
+ user:  taken courses and printed it - action Index, HomeController
+15.09.2019 10:40:42
+ user: kolian@mail.ru taken courses and printed it - action Index, HomeController
+15.09.2019 10:40:44
+ == User: kolian@mail.ru Go to personal area, action Index, ManageController
+15.09.2019 10:40:44
+ ** admin: gets courses and teachers (starts method storage.GetCoursesAndTeachers())
+gets students (starts method storage.GetStudents())
+gets the list of new teachers (storage.GetTeacherList())
+gets a size of teacher list (starts method storage.GetTeacherList().Count) - action Index,  AdminController
+15.09.2019 10:43:12
+ ** admin: gets courses and teachers (starts method storage.GetCoursesAndTeachers())
+gets students (starts method storage.GetStudents())
+gets the list of new teachers (storage.GetTeacherList())
+gets a size of teacher list (starts method storage.GetTeacherList().Count) - action Index,  AdminController
+15.09.2019 10:44:14
+ ** admin: gets courses and teachers (starts method storage.GetCoursesAndTeachers())
+gets students (starts method storage.GetStudents())
+gets the list of new teachers (storage.GetTeacherList())
+gets a size of teacher list (starts method storage.GetTeacherList().Count) - action Index,  AdminController
+15.09.2019 10:44:59
+ ** admin: action ChangeCourse, AdminController

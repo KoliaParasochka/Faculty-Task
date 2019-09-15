@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using ProjectDatabase.Entities;
 using ProjectDatabase.Models;
 using System.Data.Entity;
 using System.Security.Claims;

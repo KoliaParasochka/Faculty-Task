@@ -4,6 +4,7 @@ namespace ProjectDatabase.Migrations
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.EntityFramework;
     using ProjectDatabase.EF;
+    using ProjectDatabase.Entities;
     using ProjectDatabase.Models;
     using System;
     using System.Collections.Generic;

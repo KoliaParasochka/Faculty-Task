@@ -11,6 +11,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using ProjectDatabase.EF;
+using ProjectDatabase.Entities;
 using ProjectDatabase.Interfaces;
 //using ProjectDatabase.EF;
 using ProjectDatabase.Models;
@@ -21,7 +22,6 @@ namespace Faculty.Controllers
     [Authorize]
     public class AccountController : Controller
     {  
-        //private Storage storage = new Storage();
         private IUnitOfWork repository;
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
@@ -96,7 +96,6 @@ namespace Faculty.Controllers
                 
                 return View(model);
             }
-            //Student student = storage.GetStudent(model.Email);
             Student student = repository.Students.Find(s => s.Courses, s => s.Email == model.Email).FirstOrDefault();
             if(student != null && student.IsBlocked)
             {
@@ -205,20 +204,17 @@ namespace Faculty.Controllers
                 if (string.IsNullOrEmpty(model.IsTeacher))
                 {
                     Student student = new Student { IsBlocked = false, Name = model.Name, Surname = model.SurName, Email = model.Email };
-                    //storage.AddStudent(student);
+                    
                     repository.Students.Create(student);
                 }
                 else
                 {
-                    Storage storage = new Storage();
-                    storage.AddTeacherToList(model);
-
+                    TeacherList teacherList = new TeacherList { Name = model.Name, Email = model.Email, Surname = model.SurName };
+                    repository.TeacherLists.Create(teacherList);
                 }
-
-
                 if (result.Succeeded)
                 {
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
+                    //await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     // генерируем токен для подтверждения регистрации
                     var code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     // создаем ссылку для подтверждения
